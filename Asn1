@@ -1,9 +1,8 @@
   <html>
   <head>
   </head>
-     <h1>Project 1-Group 17</h1>
-     <Elmir>Elmir Mahammadov: Planning to visualize a biological pathway(a graph object) that would be obtained from an online database (e.g. KEGG) </Elmir> 
-     <style>
+     <h1>Project 1-Group 17</h1>    
+    <style>
      h1 {color:red;}
      </style>
      <script>
@@ -22,4 +21,16 @@
   <li><a href="https://academo.org/demos/3d-surface-plotter/">Link to 3D Surface plotter </a> </li>
   </ul>
 
+      <ol>
+    
+     <li><Elmir>Elmir Mahammadov: Planning to visualize a biological pathway(a graph object) that would be obtained from an online database (e.g. KEGG) </Elmir> </li>
+     <li><Ioannis> Ioannis Chrysostomakis: I would like to visualise and analyse genetic data from different species 
+through time to be able to understand the way natural selection(or lack thereof) has affected those species.
+The visualisation would showcase trends and groups as well as their genetic distance and how they differ from each other. This would be of interest to population geneticist and the public alike. </Ioannis> </li> 
+     <li>
+       
+       
+     </li>
+    </ol>
+    
 </html>
