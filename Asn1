@@ -2,6 +2,7 @@
   <head>
   </head>
      <h1>Project 1-Group 17</h1>
+     <Elmir>Elmir Mahammadov: Planning to visualize a biological pathway(a graph object) that would be obtained from an online database (e.g. KEGG) </Elmir> 
      <style>
      h1 {color:red;}
      </style>
