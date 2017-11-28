@@ -1,2 +1,2 @@
 # ide2017
-Repository for projects and assignements
+Repository for projects and assignments
