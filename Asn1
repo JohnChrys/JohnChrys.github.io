@@ -1,0 +1,20 @@
+<html>
+  <head>
+  </head>
+     <h1>Project1-Group Mlks</h1>
+     <style>
+     h1 {color:red;}
+     </style>
+     <script>
+       var src = 'https://craftest.eu/wp-content/uploads/2014/07/3d-chessboard-03.jpg';
+       var img = document.createElement('img');
+       img.src = src;
+       img.width=200
+       img.height=200
+       document.body.appendChild(img);   
+     </script>
+  <body>
+  <img src=http://geology.com/world/world-map.gif width= 250 height = 250>
+  </body>
+
+</html>
