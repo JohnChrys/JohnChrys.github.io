@@ -1,7 +1,7 @@
 <html>
   <head>
   </head>
-     <h1>Project 1-Group 17</h1>
+     <h1>Project 1 - Group 17</h1>
      <style>
      h1 {color:red;}
      </style>
@@ -16,5 +16,9 @@
   <body>
   <img src=http://geology.com/world/world-map.gif width= 250 height = 250>
   </body>
+  <ul>
+  <li><a href="http://geacron.com/home-en/">Link to Interactive History Map </a> </li>
+  <li><a href="https://academo.org/demos/3d-surface-plotter/">Link to 3D Surface plotter </a> </li>
+</ul>
 
 </html>
