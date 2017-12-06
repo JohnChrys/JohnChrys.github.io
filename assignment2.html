@@ -5,18 +5,24 @@
         h1 {color: #fcffff;
             text-align:center}
         h2 {color: rgba(62, 62, 62, 0.98);
-            background-color: #f8ffff; opacity: 0.95; width: fit-content;
-            text-align: center}
+            background-color: #f8ffff; 
+            opacity: 0.95; 
+            width: fit-content;
+            text-align: center;}
         body {font: 14px "Segoe UI";
             background: url("http://www.parikiaki.com/wp-content/uploads/parthenon-1.jpg") no-repeat;
             background-size: 130% 100%;
             background-blend-mode: lighten;
         }
         ol{
-        background-color: #d9fffc; opacity: 0.95; width: fit-content;
+        background-color: #d9fffc; 
+            opacity: 0.95; 
+            width: fit-content;
         }
         p{
-            background-color: #d9fffc; opacity: 0.95; width: fit-content;
+            background-color: #d9fffc; 
+            opacity: 0.95; 
+            width: fit-content;
         }
         div{
             background-color: #d9fffc; opacity: 0.95; width: fit-content;
@@ -174,13 +180,6 @@ d3.csv("johnchrys.github.io/temp.csv ",
             .attr("fill","none")
             .attr("stroke","darkblue")
             .attr("stroke-width",2);
-
-        svg1.append("line")
-            .attr("x1", x(1920))
-            .attr("x2", x(2016))
-            .attr("y1", y(19))
-            .attr("y2", y(19))
-            .style("stroke-dasharray", "black");
 
         // Add the X Axis
         svg1.append("g")
