@@ -1,28 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <h1>Project 2 - Group 17</h1>
     <style>
-        h1 {color:red;}
+        h1 {color: #fcffff;
+            text-align:center}
+        h2 {color: rgba(62, 62, 62, 0.98);
+            background-color: #f8ffff; opacity: 0.95; width: fit-content;
+            text-align: center}
+        body {font: 14px "Segoe UI";
+            background: url("http://www.parikiaki.com/wp-content/uploads/parthenon-1.jpg") no-repeat;
+            background-size: 130% 100%;
+            background-blend-mode: lighten;
+        }
+        ol{
+        background-color: #d9fffc; opacity: 0.95; width: fit-content
+        }
+        p{
+            background-color: #d9fffc; opacity: 0.95; width: fit-content
+        }
+        div{
+            background-color: #d9fffc; opacity: 0.95; width: fit-content
+        }
     </style>
+    <meta charset="UTF-8">
 </head>
 
 <body>
 
-<ul>
-<li><a href=" johnchrys.github.io/plot1.html ">Plot 1</a></li>
-<li><a href=" johnchrys.github.io/plot2.html ">Plot 2</a></li>
-</ul>
 
-        <p><h3>Personal statements</h3></p>
+<!– background alternative "http://www.nationsonline.org/gallery/Monuments/Acropolis-of-Athens.jpg" –>
 
-    <ol>
-       <h3><li>Elmir Mahammadov, question 3.2: </h3> Instead of one plot with averages of each year, we can use streamograph with a button where a button named 'next' could visualise how temperatures changed for each month for each year.</li>
-       <h3><li>Ioannis Chrysostomakis, question 3.1: </h3></li> 
-       <h3><li>Dimitris Chouliaras, question 3.3: </h3> The rendering of the visual elements representing the data is an important limiting factor. In case of large datasets we can spilt them or pull the data of particular interest. Another options is to reduce the dimensionality of data with machine learning techniques such as PCA (Principle component analysis). In this case human understanding of the meaning of the dimensions extracted is the key to success. An example of constantly expanding dataset visualization is the visualization  of live Tweets all over the world. This is a special case of continuously delivered data. The Data transformation should be fast, otherwise  the data displayed will not be coherent with time. The most recent changes should be highlighted.</li>
+
+<h1>Project 2 - Group 17</h1>
+<h2>Motivation</h2>
+<p>In this assignment we set out to plot temperature data from Athens - since two of the people in the group are Greeks -
+    starting in 1920 and ending in 2016, in two different ways in order to see if the types of visualisations
+    we use can tell us anything about the data and if they can help us identify any year-long trends. </p>
+
+
+<h2>Method</h2>
+<p>Our data comes from NASA and the Goddard Institute for Space Studies.
+    [<a href="https://data.giss.nasa.gov/cgi-bin/gistemp/show_station.cgi?id=618167140000&dt=1&ds=14">1</a>
+    <a href="https://data.giss.nasa.gov/tmp/gistemp/STATIONS/tmp_618167140000_14_0/station.txt">2</a>]
+
+    To be able to analyse it we downloaded the above text file and we manually transformed it into a csv file and removed
+    lines where the last column had values that were higher than 999 degrees Celcius. Therefore, the years
+    that were not included due to "bad" data were the years 1919,1987, 1997, 1998 and 2017.
+    The resulting file is inside the repository of this github page under the name "temp.csv". The reason we explicitly
+    provide a data-file lies not with the corrupted data alone, but also with the fact that
+    the NASA website was denying access to the scripts when they were trying to access the data from outside their
+    website and an easy bypass for this was not available to us.
+
+    We, then, used javascript code, which is inserted at the end of the html for this webpage, to plot the data first as a
+    line and secondly as a bar-plot(where every year is a single bar).
+    Both of them are honest representations of one-dimensional data and minimise bias.
+    In both plots the x axis represents years and the y axis represents the average temperature of each of those years in Celsius which is the last column of our data-file.
+
+</p>
+
+
+<h2>Results</h2>
+<div id = "image1"></div>
+<p>Figure 1: Line plot of the average temperature in Athens, from 1920 to 2016. Data source: NASA, Station Data: Athinai/Obser (38.0 N,23.7 E)</p>
+<div id = "image2"></div>
+<p>Figure 2: Histogram of the average temperature in Athens, from 1920 to 2016. Data source: NASA, Station Data: Athinai/Obser (38.0 N,23.7 E)</p>
+
+
+<h2>Discussion</h2>
+<p>...Discussion of the plots goes here...</p>
+
+<h2>Conclusions</h2>
+<p>...Our Conclusions go here...</p>
+
+
+<h3  style="background-color: #d9fffc; opacity: 0.95; width: fit-content">Individual Replies</h3>
+
+<ol>
+<li><h3>Ioannis Chrysostomakis, question 3.1: </h3>To further investigate this question there are several things we can do:
+<br /> 1) We can plot more columns from the dataset that  we used like the average seasonal or even monthly temperature
+    in order to see if there are any changes that differences that appear. This would allow us to see if the summers
+    and winters are getting warmer every year instead of the average temperature which is bound to show less variation.
+<br /><br /> 2) Another thing we can use is data from the National Centers for Environmental Information
+    (NOAA)[<a href="https://www.ncdc.noaa.gov/cdo-web/datasets">3</a> ] where we could extract data and investigate precipitation, annual snow index or sea temperature, all of which can and are
+    influenced by changes in temperature. So, even if the average temperature does no change drastically when you analyse the average value seasonal or small global temperature changes could be having a
+    large effect on the microclimate and ecosystems of the area which would then translate to higher temperatures. Some examples:
+    <br />
+    <img src="https://www.seatemperature.org/public/charts/athens-gr-sml.png">
+    <img src="https://data.giss.nasa.gov/tmp/precipcru/tmp_0_0112_2000_2000_1951_1980/map.gif" width="400" height="200">
+<br /><br /> 3) Another dataset we could also use from environmental organisation is pollution and smog data and cross-reference
+    it with temperature data. This will allow us to understand if the perturbations in the data from the previous point
+    are due to polution and not temperature increases and we would also be able to say if spikes in temperature can be
+    understood in relation to spikes in air polution.
+<br /><br /> 4) Lastly, we could plot temperature data from the same NASA institute but for more cities and compare them
+    with Athens in the form of a multiple line-plots. The reason for this would be to see if the temperature in Athens
+    follows a global trend and even if it avoids it, in which case we would have to try to understand why.
+<br /><br /> Overall, a combined, well-annotated analysis of all of this data could help us understand the local microclimate and
+    to what degree changes in temperature starting in the mid-nineties can be explained by a global trend, polution or a combination of all.</li>
+
+<li><h3>Elmir Mahammadov, question 3.2: </h3> Instead of one plot with averages of each year, we can use
+    streamograph with a button where a button named 'next' could visualise how temperatures changed for each month
+    of each year.</li>
+
+<li><h3>Dimitris Chouliaras, question 3.3: </h3> The rendering of the visual elements representing the data is an
+    important limiting factor. In case of large datasets we can spilt them or pull the data of particular interest.
+    Another options is to reduce the dimensionality of data with machine learning techniques
+    such as PCA (Principle component analysis). In this case human understanding of the meaning of
+    the dimensions extracted is the key to success. An example of constantly expanding dataset
+    visualization is the visualization  of live Tweets all over the world. This is a special case of
+    continuously delivered data. The Data transformation should be fast, otherwise  the data displayed will not be
+    coherent with time. The most recent changes should be highlighted.</li>
 
 </ol>
+
+
+<p>Disclaimer: Plot 1 was mostly build by us using standard code for building line-plots,
+    whereas plot 2 was primarily addapted from the code provided in class</p>
+
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+
+//load data
+d3.csv("temp.csv",
+    function (data) {
+        return {
+            year: +data.YEAR,
+            average: +data.metANN
+        };
+    },
+    function (data) {
+
+        //create the margin, width and height variable that we'll use
+        //create the svg object and append it to the appropriate position in the html file
+        var margin = {top: 40, right: 50, bottom: 50, left: 50};
+        var width = 1000 - margin.left - margin.right;
+        var height = 500 - margin.top - margin.bottom;
+        var svg1 = d3.select("#image1")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        //scale data
+        var x = d3.scaleLinear().rangeRound([0, width]);
+        var y = d3.scaleLinear().rangeRound([height, 0]);
+
+        // define the line
+        var plotline = d3.line()
+            .x(function(d) { return x(d.year); })
+            .y(function(d) { return y(d.average); });
+
+
+        // Scale the range of the data
+        x.domain(d3.extent(data, function (d) {
+            return d.year;
+        }));
+        y.domain([0, d3.max(data, function (d) {
+            return d.average;
+        })]);
+
+
+        // Add the line path.
+        svg1.append("path")
+            .data([data])
+            .attr("class", "line")
+            .attr("d", plotline)
+            .attr("fill","none")
+            .attr("stroke","darkblue")
+            .attr("stroke-width",2);
+
+        svg1.append("line")
+            .attr("x1", x(1920))
+            .attr("x2", x(2016))
+            .attr("y1", y(19))
+            .attr("y2", y(19))
+            .style("stroke-dasharray", "black");
+
+        // Add the X Axis
+        svg1.append("g")
+            .attr("class", "axis x")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .attr("y", 0)
+            .attr("x", 9)
+            .attr("dy", ".35em")
+            .attr("transform", "rotate(80)")
+            .style("text-anchor", "start");
+
+        // Add the Y Axis
+        svg1.append("g")
+            .attr("class", "axis y")
+            .call(d3.axisLeft(y).ticks(21));
+
+
+    });
+
+
+</script>
+
+<script>
+
+    //load data
+d3.csv("temp.csv",
+    function (data) {
+        return{
+            year : +data.YEAR,
+            average : +data.metANN};
+    },
+    function (data){
+        //create the margin, width and height variable that we'll use
+        //create the svg object and append it to the appropriate position in the html file
+        var margin = {top: 40, right: 50, bottom: 50, left: 50};
+        var width = 1000 - margin.left - margin.right;
+        var height = 500 - margin.top - margin.bottom;
+
+        var svg2 = d3.select("#image2")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+
+        //scale data
+        var x = d3.scaleBand().rangeRound([0, width])
+            .padding(0.15)
+            .domain(data.map(function(data) { return data.year; }));
+
+        var y = d3.scaleLinear().rangeRound([height, 0])
+            .domain([0, d3.max(data, function(data) { return data.average; })]);
+
+        //add x axis
+        svg2.append("g")
+            .attr("class", "axis x")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .attr("y", 0)
+            .attr("x", 9)
+            .attr("dy", ".35em")
+            .attr("transform", "rotate(80)")
+            .style("text-anchor", "start");
+
+        //add y axis
+        svg2.append("g")
+            .attr("class", "axis y")
+            .call(d3.axisLeft(y).ticks(21));
+
+        //make barplot
+        svg2.selectAll(".bar")
+            .data(data)
+            .enter().append("rect")
+            .attr("x", function(data) { return x(data.year); })
+            .attr("y", function(data) { return y(data.average); })
+            .attr("width", x.bandwidth())
+            .attr("height", function(data) { return height - y(data.average); })
+            .attr("fill","steelblue");
+
+            });
+
+
+</script>
 
 </body>
 </html>
