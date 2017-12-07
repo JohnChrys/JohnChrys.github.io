@@ -228,7 +228,7 @@ d3.csv("johnchrys.github.io/temp.csv ",
                 .style("stroke-dasharray",("7, 7")) //friends reference
                 .style("stroke","black");
 
-            //make dotted line at 17 degrees - save data in the form that we use to scale and plot
+            //make new dotted line at 17 degrees - save data in the form that we use to scale and plot
             var data3 = {year:"1920",average:"17"};
             var data4 = {year:"2016",average:"17"};
 
@@ -305,6 +305,19 @@ d3.csv("johnchrys.github.io/temp.csv ",
             .attr("width", x.bandwidth())
             .attr("height", function(data) { return height - y(data.average); })
             .attr("fill","steelblue");
+    
+            //make dotted line at 19 degrees - save data in the form that we use to scale and plot
+            var data1 = {year:0,average:"19"};
+            var data2 = {year:width,average:"19"};
+
+            //append a line and choose a style
+            svg2.append("line")
+                .attr("x1",x(data1.year))
+                .attr("x2",(data2.year))
+                .attr("y1",y(data1.average))
+                .attr("y2",y(data2.average))
+                .style("stroke-dasharray",("7, 7")) //friends reference
+                .style("stroke","black");
 
             });
 
