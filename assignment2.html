@@ -78,11 +78,12 @@
 <div id = "image1"></div>
 <p>Figure 1: Line plot of the average temperature in Athens, from 1920 to 2016. Data source: NASA, Station Data: Athinai/Obser (38.0 N,23.7 E)</p>
 <div id = "image2"></div>
-<p>Figure 2: Histogram of the average temperature in Athens, from 1920 to 2016. Data source: NASA, Station Data: Athinai/Obser (38.0 N,23.7 E)</p>
+<p>Figure 2: Barplot of the average temperature in Athens, from 1920 to 2016. Data source: NASA, Station Data: Athinai/Obser (38.0 N,23.7 E)</p>
 
 
 <h2>Discussion</h2>
-<p>...Discussion of the plots goes here...</p>
+<p>As we can see from the plots, the average temperature in Athens has been streadily increasing since the mid-nineties and starting from 1999
+     it has always been above 18 degrees C and starting in 2010 the temperatures have been, almost every year, above 19 degrees. </p>
 
 <h2>Conclusions</h2>
 <p>...Our Conclusions go here...</p>
@@ -92,13 +93,14 @@
 
 <ol>
 <li><h3>Ioannis Chrysostomakis, question 3.1: </h3>To further investigate this question there are several things we can do:
-<br /> 1) We can plot more columns from the dataset that  we used like the average seasonal or even monthly temperature
-    in order to see if there are any changes that differences that appear. This would allow us to see if the summers
-    and winters are getting warmer every year instead of the average temperature which is bound to show less variation.
-<br /><br /> 2) Another thing we can use is data from the National Centers for Environmental Information
-    (NOAA)[<a href="https://www.ncdc.noaa.gov/cdo-web/datasets">3</a> ] where we could extract data and investigate precipitation, annual snow index or sea temperature, all of which can and are
+<br /> 1) We can plot more columns from the dataset that we used, like the average seasonal or even monthly temperature,
+    in order to see if there are, instead, any seasonal temperature flactuations that would otherwise be undetectable when 
+    taking the average year temperature, which we would expect to show less variation. This would allow us to see if the summers
+    and winters,for example, are getting warmer every year.
+<br /><br /> 2) Another interesting dataset could come from the National Centers for Environmental Information
+    (NOAA)[<a href="https://www.ncdc.noaa.gov/cdo-web/datasets">3</a> ] where we could investigate precipitation, the annual snow index or sea temperature, all of which can and are
     influenced by changes in temperature. So, even if the average temperature does no change drastically when you analyse the average value seasonal or small global temperature changes could be having a
-    large effect on the microclimate and ecosystems of the area which would then translate to higher temperatures. Some examples:
+    large effect on the microclimate and ecosystems of the area which would then translate to higher temperatures. Some examples of the plots we could use are:
     <br />
     <img src="https://www.seatemperature.org/public/charts/athens-gr-sml.png">
     <img src="johnchrys.github.io/map.gif " width="400" height="200">
@@ -170,7 +172,7 @@ d3.csv("johnchrys.github.io/temp.csv ",
             .y(function(d) { return y(d.average); });
 
 
-        // Scale the range of the data
+        // Range of the data
         x.domain(d3.extent(data, function (d) {
             return d.year;
         }));
@@ -179,32 +181,58 @@ d3.csv("johnchrys.github.io/temp.csv ",
         })]);
 
 
-        // Add the line path.
-        svg1.append("path")
-            .data([data])
-            .attr("class", "line")
-            .attr("d", plotline)
-            .attr("fill","none")
-            .attr("stroke","darkblue")
-            .attr("stroke-width",2);
+        // Add the line path - add color and width
+            svg1.append("path")
+                .data([data])
+                .attr("class", "line")
+                .attr("d", plotline)
+                .attr("fill","none")
+                .attr("stroke","darkblue")
+                .attr("stroke-width",2);
 
-        // Add the X Axis
-        svg1.append("g")
-            .attr("class", "axis x")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x))
-            .selectAll("text")
-            .attr("y", 0)
-            .attr("x", 9)
-            .attr("dy", ".35em")
-            .attr("transform", "rotate(80)")
-            .style("text-anchor", "start");
+            // Add the X Axis and rotate it to see the years
+            svg1.append("g")
+                .attr("class", "axis x")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x))
+                .selectAll("text")
+                .attr("y", 0)
+                .attr("x", 9)
+                .attr("dy", ".35em")
+                .attr("transform", "rotate(80)")
+                .style("text-anchor", "start");
 
-        // Add the Y Axis
-        svg1.append("g")
-            .attr("class", "axis y")
-            .call(d3.axisLeft(y).ticks(21));
+            // Add the Y Axis with enough ticks to show all data
+            svg1.append("g")
+                .attr("class", "axis y")
+                .call(d3.axisLeft(y).ticks(21));
+            
+            
+            //make dotted line at 19 degrees - save data in the form that we use to scale and plot
+            var data1 = {year:"1920",average:"19"};
+            var data2 = {year:"2016",average:"19"};
 
+            //append a line and choose a style
+            svg1.append("line")
+                .attr("x1",x(data1.year))
+                .attr("x2",x(data2.year))
+                .attr("y1",y(data1.average))
+                .attr("y2",y(data2.average))
+                .style("stroke-dasharray",("7, 7")) //friends reference
+                .style("stroke","black");
+
+            //make dotted line at 17 degrees - save data in the form that we use to scale and plot
+            var data3 = {year:"1920",average:"17"};
+            var data4 = {year:"2016",average:"17"};
+
+            //append a line and choose a style
+            svg1.append("line")
+                .attr("x1",x(data3.year))
+                .attr("x2",x(data4.year))
+                .attr("y1",y(data3.average))
+                .attr("y2",y(data4.average))
+                .style("stroke-dasharray",("7, 7"))
+                .style("stroke","black");
 
     });
 
