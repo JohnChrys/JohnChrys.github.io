@@ -59,16 +59,16 @@
     [<a href="https://data.giss.nasa.gov/cgi-bin/gistemp/show_station.cgi?id=618167140000&dt=1&ds=14">1</a>
     <a href="https://data.giss.nasa.gov/tmp/gistemp/STATIONS/tmp_618167140000_14_0/station.txt">2</a>]
 
-    To be able to analyse it we downloaded the above text file and we manually transformed it into a csv file and removed
-    lines where the last column had values that were higher than 999 degrees Celsius. Therefore, the years
-    that were not included due to "bad" data were the years 1919,1987, 1997, 1998 and 2017.
+    To be able to analyse it we downloaded the above text file and we manually transformed it into a csv file. Some data regarding 
+    average temperature were missing and they had values 999.9 degrees. They were thus removed from the original file for our analysis.
+    Therefore, the years that were not included were the years 1919,1987, 1997, 1998 and 2017.
     The resulting file is inside the repository of this github page under the name "temp.csv". The reason we explicitly
     provide a data-file lies not with the corrupted data alone, but also with the fact that
     the NASA website was denying access to the scripts when they were trying to access the data from outside their
     website and an easy bypass for this was not available to us.
 
     We, then, used javascript code, which is inserted at the end of the html for this webpage, to plot the data first as a
-    line and secondly as a bar-plot(where every year is a single bar).
+    line and secondly as a bar-plot, where year is used as a categorical channel, and average temperature for that year as quantitave channel.
     Both of them are honest representations of one-dimensional data and minimise bias.
     In both plots the x axis represents years and the y axis represents the average temperature of each of those years in Celsius which is the last column of our data-file.
 
@@ -97,7 +97,7 @@
     even produce a density plot over the barplot.</p>
 
 
-<h3  style="background-color: #d9fffc; opacity: 0.95; width: fit-content; width:-moz-fit-content; font-size: 30px;">Individual Replies</h3>
+<h3  style="background-color: #d9fffc; opacity: 0.95; width: fit-content; width:-moz-fit-content;">Individual Replies</h3>
 
 <ol>
 <li><h3>Ioannis Chrysostomakis, question 3.1: </h3>To further investigate this question there are several things we can do:
@@ -123,17 +123,18 @@
     to what degree changes in temperature starting in the mid-nineties can be explained by a global trend, pollution or a combination of all.</li>
 
 <li><h3>Elmir Mahammadov, question 3.2: </h3> Instead of one plot with averages of each year, we can use
-    streamograph with a button where a button named 'next' could visualise how temperatures changed for each month
-    of each year.</li>
-
-<li><h3>Dimitris Chouliaras, question 3.3: </h3> Even though we are able to change the attributes of SVG containers according to the size of the input data, the amount of data may be a prohibitive factor for such visualizations at the end. i.e. in the case where we are visualizing real time data, the size of them may erupt in many times more our initial goal. What if the incoming data suddenly increase five times, and then again? As the data attributes grows bigger and bigger, the same happens to the SVG coordinate space, resulting in coordinates that are out of the view port.
-We can always split large datasets or discard data rows/columns with many missing values, since they don’t carry useful information. Setting a missing value threshold will reduce the data accordingly. Similarly, data rows/columns with little change (small variance) across the dataset are discarded due to lack of information.
-Filtering the dataset for data points of particular interest is a way to go, however another option is to hire machine learning techniques such as PCA (Principle Component Analysis) and reduce their dimensionality. PCA is a technique that emphasizes variation and makes profound the strong patterns in a dataset. Moreover, the dataset can easily be plotted in 3D, producing stunning results and giving more insight than a simple 2D representation. In the PCA case the human understanding of the meaning of the dimensions extracted is the key to success. 
-Apart from being effective classifiers, Random Forests can select important data features. i.e. by generating a large number of shallow trees and training each tree for a small fraction of the overall data features, we can keep the features that are regularly selected as best split. These features will most probably carry the more information of the dataset.
-I can’t really propose a cutoff on the size of data for D3 visualization, since dimensionality reduction is an option, especially when using the PCA technique. This kind of data preprocessing gives reasonable amount of information for visualization in the case our initial dataset is too large to be loaded. One example of a large dataset can be the eating habits of all countries around the world, represented by the average consumption of let’s say 20 different commercial food products (which means 20 dimensions). Using PCA we can make a meaningful summary visualization of how similar and different are the countries between each other based on their habits, without the need of presenting the whole the dataset.
-A different example of large dataset for visualization is the visualization of live Tweets all over the world. This is a special case of continuously delivered data that can any time erupt based on unpredicted events around the world. The data must be separated in different regions of the word and filter out the less popular among them. Old data are deleted, and new ones take their place constantly. Charts are counting the number of tweets since the user logged in. An SVG container holds the world map. The Data transformation should be fast, otherwise the data displayed will not be coherent with time. The most recent changes should be highlighted.
-Our dataset was decreased by removing lines where the last column had values that were higher than 999 degrees Celsius. Therefore, the years that were not included due to "bad" data were the years 1919, 1987, 1997, 1998 and 2017.
+    streamgraph to plot years on X axis and each month as a category and their respective values for that year on Y.
+    Each months will be different color, and we will also zoom to be able to scroll through the years horizontally to the right side.
 </li>
+
+<li><h3>Dimitris Chouliaras, question 3.3: </h3> The rendering of the visual elements representing the data is an
+    important limiting factor. In case of large datasets we can spilt them or pull the data of particular interest.
+    Another options is to reduce the dimensionality of data with machine learning techniques
+    such as PCA (Principle component analysis). In this case human understanding of the meaning of
+    the dimensions extracted is the key to success. An example of constantly expanding dataset
+    visualization is the visualization  of live Tweets all over the world. This is a special case of
+    continuously delivered data. The Data transformation should be fast, otherwise  the data displayed will not be
+    coherent with time. The most recent changes should be highlighted.</li>
 
 </ol>
 
