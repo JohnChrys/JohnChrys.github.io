@@ -126,14 +126,14 @@
     streamograph with a button where a button named 'next' could visualise how temperatures changed for each month
     of each year.</li>
 
-<li><h3>Dimitris Chouliaras, question 3.3: </h3> The rendering of the visual elements representing the data is an
-    important limiting factor. In case of large datasets we can spilt them or pull the data of particular interest.
-    Another options is to reduce the dimensionality of data with machine learning techniques
-    such as PCA (Principle component analysis). In this case human understanding of the meaning of
-    the dimensions extracted is the key to success. An example of constantly expanding dataset
-    visualization is the visualization  of live Tweets all over the world. This is a special case of
-    continuously delivered data. The Data transformation should be fast, otherwise  the data displayed will not be
-    coherent with time. The most recent changes should be highlighted.</li>
+<li><h3>Dimitris Chouliaras, question 3.3: </h3> Even though we are able to change the attributes of SVG containers according to the size of the input data, the amount of data may be a prohibitive factor for such visualizations at the end. i.e. in the case where we are visualizing real time data, the size of them may erupt in many times more our initial goal. What if the incoming data suddenly increase five times, and then again? As the data attributes grows bigger and bigger, the same happens to the SVG coordinate space, resulting in coordinates that are out of the view port.
+We can always split large datasets or discard data rows/columns with many missing values, since they don’t carry useful information. Setting a missing value threshold will reduce the data accordingly. Similarly, data rows/columns with little change (small variance) across the dataset are discarded due to lack of information.
+Filtering the dataset for data points of particular interest is a way to go, however another option is to hire machine learning techniques such as PCA (Principle Component Analysis) and reduce their dimensionality. PCA is a technique that emphasizes variation and makes profound the strong patterns in a dataset. Moreover, the dataset can easily be plotted in 3D, producing stunning results and giving more insight than a simple 2D representation. In the PCA case the human understanding of the meaning of the dimensions extracted is the key to success. 
+Apart from being effective classifiers, Random Forests can select important data features. i.e. by generating a large number of shallow trees and training each tree for a small fraction of the overall data features, we can keep the features that are regularly selected as best split. These features will most probably carry the more information of the dataset.
+I can’t really propose a cutoff on the size of data for D3 visualization, since dimensionality reduction is an always an option, especially when using the PCA technique. This kind of data preprocessing always gives reasonable amount of information for visualization in the case our initial dataset is too large to be loaded. One example of a large dataset can be the eating habits of all countries around the world, represented by the average consumption of let’s say 20 different commercial food products (which means 20 dimensions). Using PCA we can make a meaningful summary visualization of how similar and different are the countries between each other based on their habits, without the need of presenting the whole the dataset.
+A different example of large dataset for visualization is the visualization of live Tweets all over the world. This is a special case of continuously delivered data that can any time erupt based on unpredicted events around the world. The data must be separated in different regions of the word and filter out the less popular among them. Old data are deleted, and new ones take their place constantly. Charts are counting the number of tweets since the user logged in. An SVG container holds the world map. The Data transformation should be fast, otherwise  the data displayed will not be coherent with time. The most recent changes should be highlighted.
+Our dataset was decreased by removing lines where the last column had values that were higher than 999 degrees Celsius. Therefore, the years that were not included due to "bad" data were the years 1919, 1987, 1997, 1998 and 2017.
+</li>
 
 </ol>
 
