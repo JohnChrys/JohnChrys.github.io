@@ -55,22 +55,24 @@
 
 
 <h2>Method</h2>
-<p>Our data comes from NASA and the Goddard Institute for Space Studies.
+<p>Our data come from NASA and the Goddard Institute for Space Studies.
     [<a href="https://data.giss.nasa.gov/cgi-bin/gistemp/show_station.cgi?id=618167140000&dt=1&ds=14">1</a>
     <a href="https://data.giss.nasa.gov/tmp/gistemp/STATIONS/tmp_618167140000_14_0/station.txt">2</a>]
-
-    To be able to analyse it we downloaded the above text file and we manually transformed it into a csv file. Some data regarding 
-    average temperature were missing and they had values 999.9 degrees. They were thus removed from the original file for our analysis.
-    Therefore, the years that were not included were the years 1919,1987, 1997, 1998 and 2017.
+    <br /><br />
+    The data include the average monthly, seasonal and yearly temperature of each year from 1919 to 2017.
+    <br />To be able to analyse it we downloaded the above text file and we manually transformed it into a csv file. Some data regarding 
+    average temperature were missing and they had very high values instead(999.9 degrees). 
+    They were, thus, removed from the original file for our analysis.
+    Therefore, the years that were not included were the years 1919, 1987, 1997, 1998 and 2017.
     The resulting file is inside the repository of this github page under the name "temp.csv". The reason we explicitly
     provide a data-file lies not with the corrupted data alone, but also with the fact that
     the NASA website was denying access to the scripts when they were trying to access the data from outside their
-    website and an easy bypass for this was not available to us.
-
+    website and an easy bypass for this was not available to us. <br /><br />
     We, then, used javascript code, which is inserted at the end of the html for this webpage, to plot the data first as a
-    line and secondly as a bar-plot, where year is used as a categorical channel, and average temperature for that year as quantitave channel.
-    Both of them are honest representations of one-dimensional data and minimise bias.
-    In both plots the x axis represents years and the y axis represents the average temperature of each of those years in Celsius which is the last column of our data-file.
+    line and secondly as a bar-plot Both of them are honest representations of one-dimensional data and minimise bias. 
+    The date is used as a categorical channel, and the average temperature for that year as quantitave channel.
+    For our plots, we used in the x axis we represent years and in the y axis we represent the average yearly temperature in Celsius,
+    which is the last column of our data-file.
 
 </p>
 
@@ -110,8 +112,12 @@
     influenced by changes in temperature. So, even if the average temperature does no change drastically when you analyse the average value seasonal or small global temperature changes could be having a
     large effect on the microclimate and ecosystems of the area which would then translate to higher temperatures. Some examples of the plots we could use are:
     <br />
+    (A)
     <img src="https://www.seatemperature.org/public/charts/athens-gr-sml.png">
+    (B)
     <img src="johnchrys.github.io/map.gif " width="400" height="200">
+    <br /><br />
+    Figure 3: A: Average sea temperature in Athens in 2017 in Celsius. B: Year 2000 mean global precipitation change compared to 1950-1980.
 <br /><br /> 3) Another dataset we could also use from environmental organisation is pollution and smog data and cross-reference
     it with temperature data. This will allow us to understand if the perturbations in the data from the previous point
     are due to pollution and not temperature increases and we would also be able to say if spikes in temperature can be
