@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 3</title>
+    <style>
+    .node circle {
+        fill: #fff;
+        stroke: #b40200;
+        stroke-width: 3px;
+    }
+    .node text { font: 12px sans-serif; }
+    .node--internal text {
+        text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+    }
+    .link {
+        fill: none;
+        stroke: #d8d906;
+        stroke-width: 2px;
+    }
+    .container { clear: both; }
+    h2 {color: rgba(62, 62, 62, 0.98);
+        background-color: #f8ffff;
+        opacity: 0.95;
+        width: fit-content;
+        width:-moz-fit-content;}
+    body {font: 14px "Segoe UI";
+    }
+    ol{
+        background-color: #d9fffc;
+        opacity: 0.95;
+        width: fit-content;
+        width:-moz-fit-content;
+        max-height: fit-content;
+    }
+    p{
+        background-color: #d9fffc;
+        opacity: 0.95;
+        width: fit-content;
+        width:-moz-fit-content;
+        max-height: fit-content;
+    }
+    div{
+        background-color: #d9fffc; opacity: 0.95; width: fit-content;
+        width:-moz-fit-content;
+        max-height: fit-content;
+    }
+
+    </style>
+</head>
+<body>
+
+<h1>Assignment 3 - Group 17</h1>
+
+
+
+<div id = "image1"></div>
+
+<script src="//d3js.org/d3.v4.min.js"></script>
+<script>
+
+    d3.json("trump_family.json",
+        function(treeData) {
+
+            var margin = {top: 40, right: 50, bottom: 50, left: 100};
+            var width = 1000 - margin.left - margin.right;
+            var height = 500 - margin.top - margin.bottom;
+            var svg = d3.select("#image1")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                    .attr("transform", "translate(140,0)");
+
+
+            // declares a tree layout and assigns the size
+            var treemap = d3.tree()
+                .size([height, width/1.3]);
+
+            //  assigns the data to a hierarchy using parent-child relationships
+            var nodes = d3.hierarchy(treeData, function (d) {
+                return d.children;
+            });
+
+            // maps the node data to the tree layout
+            nodes = treemap(nodes);
+
+
+            // adds the links between the nodes
+            var link = svg.selectAll(".link")
+                .data(nodes.descendants().slice(1))
+                .enter().append("path")
+                .attr("class", "link")
+                .attr("d", function (d) {
+                    return "M" + d.y + "," + d.x
+                        + "C" + (d.y + d.parent.y) / 2 + "," + d.x
+                        + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
+                        + " " + d.parent.y + "," + d.parent.x;
+                });
+
+            // adds each node as a group
+            var node = svg.selectAll(".node")
+                .data(nodes.descendants())
+                .enter().append("g")
+                .attr("class", function (d) {
+                    return "node" +
+                        (d.children ? " node--internal" : " node--leaf");
+                })
+                .attr("transform", function (d) {
+                    return "translate(" + d.y + "," + d.x + ")";
+                });
+
+            // adds the circle to the node
+            node.append("circle")
+                .attr("r",8);
+
+            // adds the text to the node
+            node.append("text")
+                .attr("dy", ".35em")
+                .attr("x", function (d) {
+                    return d.children ? -13 : 13;
+                })
+                .style("text-anchor", function (d) {
+                    return d.children ? "end" : "start";
+                })
+                .text(function (d) {
+                    return d.data.name;
+                });
+        });
+</script>
+    </body>
+</html>
