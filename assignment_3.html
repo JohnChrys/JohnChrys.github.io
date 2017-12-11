@@ -4,63 +4,85 @@
     <meta charset="UTF-8">
     <title>Assignment 3</title>
     <style>
-    .node circle {
-        fill: #fff;
-        stroke: #b40200;
-        stroke-width: 3px;
-    }
-    .node text { font: 12px sans-serif; }
-    .node--internal text {
-        text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
-    }
-    .link {
-        fill: none;
-        stroke: #d8d906;
-        stroke-width: 2px;
-    }
-    .container { clear: both; }
-    h2 {color: rgba(62, 62, 62, 0.98);
-        background-color: #f8ffff;
-        opacity: 0.95;
-        width: fit-content;
-        width:-moz-fit-content;}
-    body {font: 14px "Segoe UI";
-    }
-    ol{
-        background-color: #d9fffc;
-        opacity: 0.95;
-        width: fit-content;
-        width:-moz-fit-content;
-        max-height: fit-content;
-    }
-    p{
-        background-color: #d9fffc;
-        opacity: 0.95;
-        width: fit-content;
-        width:-moz-fit-content;
-        max-height: fit-content;
-    }
-    div{
-        background-color: #d9fffc; opacity: 0.95; width: fit-content;
-        width:-moz-fit-content;
-        max-height: fit-content;
-    }
+        a{
+            background-color: white;
+            width: auto;
+            height: auto;
+            padding: auto;
+            font: 14px "Segoe UI";
+            border-radius: 5px;
 
+        }
+        .node circle {
+            fill: #fff;
+            stroke: #b40200;
+            stroke-width: 3px;
+        }
+        .node text { font: 14px "Segoe UI"; }
+        .node--internal text {
+            text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+        }
+        div.tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: auto;
+            font: 14px "Segoe UI";
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        .link {
+            fill: none;
+            stroke: #d8d906;
+            stroke-width: 2px;
+        }
+        .container { clear: both; }
+        h2 {color: rgba(62, 62, 62, 0.98);
+            background-color: #f8ffff;
+            opacity: 0.95;
+            width: fit-content;
+            width:-moz-fit-content;}
+        body {font: 14px "Segoe UI";
+            background-image: url("gold.jpg");
+        }
+        ol{
+            background-color: #d9fffc;
+            opacity: 0.95;
+            width: fit-content;
+            width:-moz-fit-content;
+            max-height: fit-content;
+        }
+        p{
+            background-color: #d9fffc;
+            opacity: 0.95;
+            width: fit-content;
+            width:-moz-fit-content;
+            max-height: fit-content;
+        }
+        div{
+            background-color: #d9fffc; opacity: 0.95; width: fit-content;
+            width:-moz-fit-content;
+            max-height: fit-content;
+        }
     </style>
 </head>
 <body>
 
-<h1>Assignment 3 - Group 17</h1>
+<h1 style="color: white; background-color: black; text-align: center">Assignment 3 - Group 17</h1>
 
 
 
 <div id = "image1"></div>
 
-<script src="//d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3.v4.js"></script>
+
 <script>
 
     d3.json("trump_family.json",
         function(treeData) {
+
 
             var margin = {top: 40, right: 50, bottom: 50, left: 100};
             var width = 1000 - margin.left - margin.right;
@@ -70,8 +92,13 @@
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(140,0)");
+                .attr("transform", "translate(140,0)");
 
+            // Define 'div' for tooltips
+            var div = d3.select("body")
+                .append("div")  // declare the tooltip div
+                .attr("class", "tooltip")              // apply the 'tooltip' class
+                .style("opacity", 0);
 
             // declares a tree layout and assigns the size
             var treemap = d3.tree()
@@ -81,6 +108,7 @@
             var nodes = d3.hierarchy(treeData, function (d) {
                 return d.children;
             });
+
 
             // maps the node data to the tree layout
             nodes = treemap(nodes);
@@ -112,7 +140,18 @@
 
             // adds the circle to the node
             node.append("circle")
-                .attr("r",8);
+                .attr("r",8)
+                // Tooltip stuff after this
+                .on("mouseover", function(d) {
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 1);
+                    div.html(
+                        d.data.info + '<br />'  +
+                        '<a href = "' + d.data.link + '">LINK</a>')
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                });
 
             // adds the text to the node
             node.append("text")
@@ -123,10 +162,33 @@
                 .style("text-anchor", function (d) {
                     return d.children ? "end" : "start";
                 })
-                .text(function (d) {
-                    return d.data.name;
+                .html(function (d) {
+                    return d.data.name[0] ;
                 });
+
+            node.append("text")
+                .attr("dy", "1.2em")
+                .attr("x", function (d) {
+                    return d.children ? -13 : 13;
+                })
+                .style("text-anchor", function (d) {
+                    return d.children ? "end" : "start";
+                })
+                .html(function (d) {
+                    return d.data.name[1] ;
+                });
+
+
         });
 </script>
-    </body>
+
+<h2>Comments:</h2>
+
+<p>We use black for the background of the title and Smaug's treasure as the body background to symbolise the moral decay of the
+Republican Party(here represented in black) <br /> against the veneer and glamour of their wealthy representatives(here represented in gold).<br /><br />
+In the graph, we represent the Trump family's Scottish ancestry in red and German ancestry in yellow and we use a blue background to stay consistent with the previous assignment. <br />Thankfully, no color-clashes are created and the letters are above a contrasting, solid background.
+</p>
+
+<p>The tooltip code comes from: <a href="https://gist.github.com/d3noob/c37cb8e630aaef7df30d#file-data-csv-L15">here</a> </p>
+</body>
 </html>
