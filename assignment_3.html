@@ -86,7 +86,7 @@
         function(treeData) {
 
 
-            var margin = {top: 40, right: 50, bottom: 50, left: 100};
+            var margin = {top: 40, right: 50, bottom: 50, left: 200};
             var width = 1000 - margin.left - margin.right;
             var height = 500 - margin.top - margin.bottom;
             var svg = d3.select("#image1")
@@ -94,7 +94,7 @@
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                .attr("transform", "translate(140,0)");
+                .attr("transform", "translate(170,0)");
 
             // Define 'div' for tooltips
             var div = d3.select("body")
