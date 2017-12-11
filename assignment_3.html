@@ -22,6 +22,17 @@
         .node--internal text {
             text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
         }
+        text:hover{
+            fill: rgb(100, 9, 95);
+            font: 25px "Segoe UI";
+            }
+        circle:hover {
+				fill: rgb(23, 9, 100);
+                stroke-width: 20px;
+			}
+        internal text:hover{
+            fill: rgb(15, 9, 100);
+        }
         div.tooltip {
             position: absolute;
             text-align: center;
@@ -34,7 +45,7 @@
             background-color: white;
             border-radius: 5px;
         }
-
+        
         .link {
             fill: none;
             stroke: #d8d906;
@@ -143,8 +154,9 @@
             // adds the circle to the node
             node.append("circle")
                 .attr("r",8)
+                .attr("cursor", "pointer")
                 // Tooltip stuff after this
-                .on("mouseover", function(d) {
+                .on("click", function(d) {
                     div.transition()
                         .duration(500)
                         .style("opacity", 1);
