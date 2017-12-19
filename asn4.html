@@ -56,6 +56,18 @@
             width:-moz-fit-content;
             max-height: fit-content;
         }
+        div.tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            float: left;
+            border: 3px solid #000000;
+            padding: auto;
+            font: 14px "Segoe UI";
+            background-color: white;
+            border-radius: 5px;
+        }
 
     </style>
 </head>
@@ -83,15 +95,10 @@
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
-    var width2 = width - 150;
+    var width2 = width - 300;
     var svg2 = d3.select("#pca").append("svg")
         .attr("width", width2)
         .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
-    var svg3 = d3.select("#hand").append("svg")
-        .attr("width", width - 300)
-        .attr("height", height + margin.top + margin.bottom-300)
         .append("g")
         .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
 
@@ -166,6 +173,7 @@
 
             var tooltip = d3.select("#pca")
                 .append("div")
+                .attr("class", "tooltip")
                 .style("background-color", "rgba(163, 171, 253, 0.6)")
                 .style("font-Family", "")
                 .style("background-opacity", "0.5")
