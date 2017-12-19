@@ -107,15 +107,15 @@ var svg2 = d3.select("#pca").append("svg")
 
 d3.text("hands.csv", function(data) {
 var hand_data = d3.csv.parseRows(data).map(function(row) {
-return row.map(function(val) {
-return +val;
-});
+        return row.map(function(val) {
+        return +val;
+        });
 });
 d3.text("hands_pca.csv", function(data) {
 var hand_pca_data = d3.csv.parseRows(data).map(function(col, i) {
-return d3.csv.parseRows(data).map(function(row) {
-return +row[i]
-})
+        return d3.csv.parseRows(data).map(function(row) {
+        return +row[i]
+        })
 });
 
 
@@ -128,7 +128,6 @@ hands[i] = d3.zip(shape.slice(0, 56),shape.slice(56, 113));
 
 };
 
-
 var pc = [1,2];
 
 var pca_hands = d3.zip(hand_pca_data[pc[0]-1],hand_pca_data[pc[1]-1]);
@@ -138,70 +137,76 @@ var scale_h = width/3;
 
 
 var x = function(d) { return d;}, 
-xScale = d3.scale.linear()
-.domain([d3.min(pca_hands, function(d) { return d[0]; })/0.8,d3.max(pca_hands, function(d) { return d[0]; })*1.2])
-.range([0, width2]),
-xMap = function(d) { return xScale(x(d[0]));},
-xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+        xScale = d3.scale.linear()
+        .domain([d3.min(pca_hands, function(d) { return d[0]; })/0.8,d3.max(pca_hands, function(d) { return d[0]; })*1.2])
+        .range([0, width2]),
+        xMap = function(d) { return xScale(x(d[0]));},
+        xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+        
 var yValue = function(d) { return d;},
-yScale = d3.scale.linear()
-.domain([d3.min(pca_hands, function(d) { return d[1]; })/0.8, d3.max(pca_hands, function(d) { return d[1]; })*1.2])
-.nice()
-.range([height, 0]), 
-yMap = function(d) { return yScale(yValue(d[1]));}, 
-yAxis = d3.svg.axis().scale(yScale).orient("left");
+        yScale = d3.scale.linear()
+        .domain([d3.min(pca_hands, function(d) { return d[1]; })/0.8, d3.max(pca_hands, function(d) { return d[1]; })*1.2])
+        .nice()
+        .range([height, 0]), 
+        yMap = function(d) { return yScale(yValue(d[1]));}, 
+        yAxis = d3.svg.axis().scale(yScale).orient("left");
 
 svg2.append("g")
-.attr("class", "x_axis")
-.attr("transform", 'translate(0, '+ height +')')
-.call(xAxis);
+        .attr("class", "x_axis")
+        .attr("transform", 'translate(0, '+ height +')')
+        .call(xAxis);
+        
 svg2.append("text")
-.attr("class", "xlabel")
-.attr("x", width2 - 40)
-.attr("y", height - 6)
-.style("text-anchor", "end")
-.text("PC"+pc[0]);
+        .attr("class", "xlabel")
+        .attr("x", width2 - 40)
+        .attr("y", height - 6)
+        .style("text-anchor", "end")
+        .text("PC"+pc[0]);
 
 svg2.append("g")
-.attr("class", "y_axis")
-.call(yAxis);
+        .attr("class", "y_axis")
+        .call(yAxis);
 svg2.append("text")
-.attr("class", "ylabel")
-.attr("transform", "rotate(-90)")
-.attr("y", 6)
-.attr("dy", ".71em")
-.style("text-anchor", "end")
-.text("PC"+pc[1]);
+        .attr("class", "ylabel")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("PC"+pc[1]);
 
 var tooltip = d3.select("#pca")
-.append("div")
-.style("background-color", "rgba(163, 171, 253, 0.6)")
-.style("font-Family", "")
-.style("background-opacity", "0.5")
-.style("position", "absolute")
-.style("visibility", "hidden");
+        .append("div")
+        .style("background-color", "rgba(163, 171, 253, 0.6)")
+        .style("font-Family", "")
+        .style("background-opacity", "0.5")
+        .style("position", "absolute")
+        .style("visibility", "hidden");
 
 var lineFn = d3.svg.line()
-.x(function(d) { return d[0]*scale_h; })
-.y(function(d) { return d[1]*scale_h; });
+        .x(function(d) { return d[0]*scale_h; })
+        .y(function(d) { return d[1]*scale_h; });
 
 var hand_picture = svg.append("g")
-.append("path")
-.attr("d", lineFn(hands[0]));
+        .append("path")
+        .attr("d", lineFn(hands[0]));
 
 var points = svg2.selectAll('circle')
-.data(pca_hands)
-.enter()
-.append('circle')
-.attr("cx", xMap)
-.attr("cy", yMap)
-.attr('r', 4)
-.on('click', function(d, i) {
-hand_picture
-.attr("d", lineFn(hands[i]));})
-.attr("cursor","pointer")
-});
-});
+        .data(pca_hands)
+        .enter()
+        .append('circle')
+        .attr("cx", xMap)
+        .attr("cy", yMap)
+        .attr('r', 4)
+        .on('click', function(d, i) {
+                hand_picture
+                .attr("d", lineFn(hands[i]));})
+                .attr("cursor","pointer")
+                });
+        svg2.selectAll("path")
+                .on("mouseover", function(d, i){return tooltip.style("visibility", "visible").text("Cluster: " + (+this.id+1)), figure.style("cursor", "pointer");})
+                .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+                .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+            });
 
 </script>
 </div>
