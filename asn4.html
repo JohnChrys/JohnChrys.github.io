@@ -79,7 +79,7 @@
         height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select("#hand").append("svg")
-        .attr("width", width - 400)
+        .attr("width", width - 300)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
@@ -90,7 +90,7 @@
         .append("g")
         .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
     var svg3 = d3.select("#hand").append("svg")
-        .attr("width", width - 400)
+        .attr("width", width - 300)
         .attr("height", height + margin.top + margin.bottom-300)
         .append("g")
         .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
@@ -201,7 +201,7 @@
                             else return 4;
                         })
                         .style('fill',function(d,i){
-                            if(ind===i) return 'black';
+                            if(ind===i) return 'red';
                             else return 'white';
                         }),
                     svg2.style("cursor", "pointer");})
@@ -213,7 +213,7 @@
                             else return 4;
                         })
                         .style('fill',function(d,i){
-                            if(ind===i) return 'white';});
+                            if(ind===i) return 'blue';});
                                               })
             ;
              d3.select("body").append("button")
