@@ -302,7 +302,7 @@ var svg3 = d3.select("#hand").append("svg")
                             if(ind===i) return 'blue';});
                                               })
             ;
-           d3.select("body").append("button")
+           d3.select("#pca").append("button")
                 .text("wide-closed")
                 .on("click",function(){
 
@@ -313,7 +313,7 @@ var svg3 = d3.select("#hand").append("svg")
                 .attr("d", lineFn(hands[35]));
 
                 });
-           d3.select("body").append("button")
+           d3.select("#pca").append("button")
                 .text("wide-open")
                 .on("click",function(){
                 var hand_picture = svg3.append("g")
