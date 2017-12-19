@@ -189,8 +189,6 @@ var lineFn = d3.svg.line()
 var hand_picture = svg.append("g")
         .append("path")
         .attr("d", lineFn(hands[0]))
-        .on("click", function() {
-    $('#path1').css({ fill: "#fff" });
 });
 
 
@@ -206,26 +204,6 @@ var points = svg2.selectAll('circle')
     .transition()
     .duration(1250)
       .attr("d", lineFn(hands[i]));})
-  .on("mouseover", function(d, i){return tooltip.style("visibility", "visible").text("Hand: " + i), ind = i,
-      svg2.selectAll('circle')
-          .attr("r", function(d,i){
-              if(ind===i) return 6;
-              else return 4;
-          })
-          .style('fill',function(d,i){
-                  if(ind===i) return 'black';
-                  else return 'white';
-              }),
-      svg2.style("cursor", "pointer");})
-  .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-  .on("mouseout", function(d, i){return tooltip.style("visibility", "hidden"), ind = i,
-      svg2.selectAll('circle')
-      .attr("r", function(d,i){
-          if(ind===i) return 4;
-          else return 4;
-      })
-          .style('fill',function(d,i){
-              if(ind===i) return 'white';
 });});
 
 </script>
