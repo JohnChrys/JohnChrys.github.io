@@ -90,17 +90,23 @@
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
-    var svg = d3.select("#hand").append("svg")
-        .attr("width", width - 300)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
-    var width2 = width - 300;
-    var svg2 = d3.select("#pca").append("svg")
-        .attr("width", width2)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
+var svg = d3.select("#hand").append("svg")
+.attr("width", width - 600)
+.attr("height", height + margin.top + margin.bottom)
+.append("g")
+.attr("transform", "translate("+ margin.left + "," + margin.top + ")");
+var width2 = width - 150;
+var svg2 = d3.select("#pca").append("svg")
+.attr("width", width2)
+.attr("height", height + margin.top + margin.bottom)
+.append("g")
+.attr("transform", "translate("+ margin.left + "," + margin.top + ")");
+var svg3 = d3.select("#hand").append("svg")
+.attr("width", width - 400)
+.attr("height", height + margin.top + margin.bottom-300)
+.append("g")
+.attr("transform", "translate("+ margin.left + "," + margin.top + ")");
+
 
 
     d3.text("hands.csv", function(data) {
@@ -224,15 +230,24 @@
                             if(ind===i) return 'blue';});
                                               })
             ;
-             d3.select("body").append("button")
-                .text("right-most")
-                .on("click",function(){
-                    var hand_picture = svg.append("g")
-                        .append("path")
-                        .attr("d", lineFn(hands[36]))
-                    ;
+            d3.select("body").append("button")
+.text("wide-closed")
+.on("click",function(){
 
-                });
+var hand_picture = svg3.append("g")
+.append("path")
+.attr("d", lineFn(hands[35]));
+
+});
+d3.select("body").append("button")
+.text("wide-open")
+.on("click",function(){
+var hand_picture = svg3.append("g")
+.append("path")
+.attr("d", lineFn(hands[29]))
+.exit().remove()
+});
+
 
         })
 
