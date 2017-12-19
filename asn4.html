@@ -91,19 +91,19 @@
         height = 500 - margin.top - margin.bottom;
 
 var svg = d3.select("#hand").append("svg")
-    .attr("width", width - 300)
+    .attr("width", width - 500)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
-var width2 = width - 300;
+var width2 = width - 400;
 var svg2 = d3.select("#pca").append("svg")
     .attr("width", width2)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
 var svg3 = d3.select("#hand").append("svg")
-    .attr("width", width - 300)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", width - 500)
+    .attr("height", height + margin.top + margin.bottom-300)
     .append("g")
     .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
 
