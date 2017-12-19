@@ -86,7 +86,7 @@
 </div>
 
 <script>
-    var margin = {top:20 , right: 40, bottom: 30, left: 40},
+    var margin = {top:20 , right: 40, bottom: 30, left: 20},
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
@@ -103,7 +103,7 @@ var svg2 = d3.select("#pca").append("svg")
     .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
 var svg3 = d3.select("#hand").append("svg")
     .attr("width", width - 300)
-    .attr("height", height + margin.top + margin.bottom-300)
+    .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
 
@@ -180,13 +180,7 @@ var svg3 = d3.select("#hand").append("svg")
             var tooltip = d3.select("#pca")
                 .append("div")
                 .attr("class", "tooltip")
-                .style("background-color", "rgba(163, 171, 253, 0.6)")
-                .style("font-Family", "")
-                .style("background-opacity", "0.5")
-                .style("position", "absolute")
                 .style("visibility", "hidden");
-
-
 
             var lineFn = d3.svg.line()
                 .x(function(d) { return d[0]*scale_h; })
