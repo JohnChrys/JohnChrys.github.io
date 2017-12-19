@@ -125,7 +125,7 @@
         <h3>PCA</h3>
 
     </div>
-    <div id="all_hands">
+    <div id="all_hands" style="background-color: transparent">
 </div>
 </div>
     
@@ -382,12 +382,12 @@ var svg3 = d3.select("#hand").append("svg")
                         .attr("stroke", "black")
                         .attr("stroke-width", 1)
                         .attr("opacity", "1")
-                        .attr("fill", "rgba(255,228, 196, 0.6)")
+                        .attr("fill", "black")
                         .attr("id", count)
                         .attr('transform', 'translate('+(xpos)+','+ypos+')')
                         .on('mouseover', function() {
                             d3.select(this)
-                                .style('fill', "black");
+                                .style('fill', "red");
                             ind = +this.id;
                             svg2.selectAll('circle')
                                 .attr("r", function(d,i){
@@ -401,7 +401,7 @@ var svg3 = d3.select("#hand").append("svg")
                         })
                         .on('mouseout', function() {
                             d3.select(this)
-                                .style("fill", "rgba(255,228, 196, 0.6)");
+                                .style("fill", "black");
                             ind = +this.id;
                             svg2.selectAll('circle')
                                 .attr("r", function(d,i){
@@ -409,7 +409,7 @@ var svg3 = d3.select("#hand").append("svg")
                                     else return 4;
                                 })
                                 .style('fill',function(d,i){
-                                    if(ind===i) return 'white';
+                                    if(ind===i) return 'blue';
                                 });
                         });
                     xpos += stepX;
