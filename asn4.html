@@ -124,8 +124,8 @@
     <div id="pca" align="center">
         <h3>PCA</h3>
     </div>
-    </div>
-    <div id="all_hands" style="background-color: transparent"></div>
+</div>
+<div id="all_hands" style="background-color: transparent"></div>
     
     <h2>Results</h2>
     
@@ -151,7 +151,10 @@
         to the distance from the middle finger to the thumb 
         (distance gets wider on the lower PC2 axis, while it gets shorter on the upper PC2 axis).
     </p>
-    
+        <h2>Contributions</h2>
+    <p>
+
+    </p>
    
 <script>
     var margin = {top:20 , right: 40, bottom: 30, left: 20},
@@ -307,12 +310,12 @@ var svg3 = d3.select("#hand").append("svg")
                 .text("Hand Widely Opened")
                 .on("click",function(){
                 var hand_picture = svg3.append("g")
-                .append("path")
-                .style('fill','red')
-                .style('opacity','0.5')
-                .attr("d", lineFn(hands[29]))
-                .exit().remove()
-                });
+                    .append("path")
+                    .style('fill','red')
+                    .style('opacity','0.5')
+                    .attr("d", lineFn(hands[29]))
+                    .exit().remove()
+                  });
             
 
         function multiple_hands(id, width, height, square, points)
@@ -418,7 +421,7 @@ var svg3 = d3.select("#hand").append("svg")
             }
             return data;
         }
-        multiple_hands('#all_hands', 1000, 200, true, points);
+        multiple_hands('#all_hands', 1800, 200, true, points);
 
 
         })
