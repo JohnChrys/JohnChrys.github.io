@@ -1,209 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<meta charset="utf-8">
+    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <meta charset="utf-8">
 
-<title>Assignment 4: Group 17</title>
-<style>
-body {
-max-width: 1700px;
-min-width: 1700px;
-max-height: 95%;
-min-height: 95%;
-}
+    <title>Assignment 4: Group 17</title>
+    <style>
+        body {
+            max-width: 1700px;
+            min-width: 1700px;
+            max-height: 95%;
+            min-height: 95%;
+        }
 
-#nav {
-font-family: 'Segoe UI';
-position: fixed;
-line-height:30px;
-background-color: white;
-height:150px;
-width:100px;
-float:left;
-padding:5px;
-}
+        #nav {
+            font-family: "Segoe UI",sans-serif;
+            position: fixed;
+            line-height:30px;
+            background-color: white;
+            height:150px;
+            width:100px;
+            float:left;
+            padding:5px;
+        }
 
-#section {
-font-family: 'Segoe UI';
-width:80%;
-float:left;
-padding:10px;
-margin-left: 10%;
-margin-right: 15%;
-background-color: white;
-text-align: justify;
+        #section {
+            font-family: "Segoe UI",sans-serif;
+            width:80%;
+            float:left;
+            padding:10px;
+            margin-left: 10%;
+            margin-right: 10%;
+            background-color: white;
+            text-align: justify;
 
-}
+        }
 
-#plot {
-font-family: 'Segoe UI';
-width:100%;
-float:left;
-padding:10px;
-background-color: white;
-}
+        #hand, #pca {
+            float: left;
+        }
 
+        circle {
+            fill: blue;
+            stroke: black;
+            stroke-width: 1.5px;
+        }
 
-#pca {
-margin-left:50px;
-}
-#hand {
-margin-left:30px;
-}
-#hand, #pca {
-float: left;
-}
+        circle:hover{
+            fill: rgb(6, 44, 22);
+            stroke: red;
+            stroke-width:4.0px;
+        }
+        div{
+            background-color: #d9fffc; opacity: 0.95; width: fit-content;
+            width:-moz-fit-content;
+            max-height: fit-content;
+        }
 
-circle {
-fill: blue;
-stroke: black;
-stroke-width: 1.5px;
-}
-circle:hover{
-fill: rgb(6, 44, 22);
-stroke: red;
-stroke-width:4.0px;
-}
-div{
-        background-color: #d9fffc; opacity: 0.95; width: fit-content;
-        width:-moz-fit-content;
-        max-height: fit-content;
-}
-</style>
+    </style>
 </head>
 <body>
 
 <h1 style="color: white; background-color: black; text-align: center">Assignment 4 - Group 17</h1>
 
 <div id="plot">
-<div id="hand" align="center">
-<h3>Corresponding Outlines of the Hands</h3>
-</div>
-<div id="pca" align="center">
-<h3>PCA</h3>
+    <div id="hand" align="center">
+        <h3>Corresponding Outlines of the Hands</h3>
+    </div>
+    <div id="pca" align="center">
+        <h3>PCA</h3>
 
-</div>
+    </div>
 </div>
 
 <script>
-var margin = {top:20 , right: 20, bottom: 30, left: 40},
-width = 960 - margin.left - margin.right,
-height = 500 - margin.top - margin.bottom;
+    var margin = {top:20 , right: 40, bottom: 30, left: 40},
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
 
-var svg = d3.select("#hand").append("svg")
-.attr("width", width - 400)
-.attr("height", height + margin.top + margin.bottom)
-.append("g")
-.attr("transform", "translate("+ margin.left + "," + margin.top + ")");
+    var svg = d3.select("#hand").append("svg")
+        .attr("width", width - 400)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
+    var width2 = width - 150;
+    var svg2 = d3.select("#pca").append("svg")
+        .attr("width", width2)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
+    var svg3 = d3.select("#hand").append("svg")
+        .attr("width", width - 400)
+        .attr("height", height + margin.top + margin.bottom-300)
+        .append("g")
+        .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
 
-var width2 = width - 150;
-var svg2 = d3.select("#pca").append("svg")
-.attr("width", width2)
-.attr("height", height + margin.top + margin.bottom)
-.append("g")
-.attr("transform", "translate("+ margin.left + "," + margin.top + ")");
 
-
-d3.text("hands.csv", function(data) {
-var hand_data = d3.csv.parseRows(data).map(function(row) {
-        return row.map(function(val) {
-        return +val;
+    d3.text("hands.csv", function(data) {
+        var hand_data = d3.csv.parseRows(data).map(function(row) {
+            return row.map(function(val) {
+                return +val;
+            });
         });
-});
-d3.text("hands_pca.csv", function(data) {
-var hand_pca_data = d3.csv.parseRows(data).map(function(col, i) {
-        return d3.csv.parseRows(data).map(function(row) {
-        return +row[i]
-        })
-});
+        d3.text("hands_pca.csv", function(data) {
+            var hand_pca_data = d3.csv.parseRows(data).map(function(col, i) {
+                return d3.csv.parseRows(data).map(function(row) {
+                    return +row[i]
+                })
+            });
 
 
-var hands=[];
+            var hands=[];
 
-for (i in hand_data) {
+            for (i in hand_data) {
 
-var shape = hand_data[i];
-hands[i] = d3.zip(shape.slice(0, 56),shape.slice(56, 113));
+                var shape = hand_data[i];
+                hands[i] = d3.zip(shape.slice(0, 56),shape.slice(56, 113));
 
-};
-
-var pc = [1,2];
-
-var pca_hands = d3.zip(hand_pca_data[pc[0]-1],hand_pca_data[pc[1]-1]);
-
-var pos = {x: 250, y: 230, xh: 60, yh: 85};
-var scale_h = width/3;
+            };
 
 
-var x = function(d) { return d;}, 
-        xScale = d3.scale.linear()
-        .domain([d3.min(pca_hands, function(d) { return d[0]; })/0.8,d3.max(pca_hands, function(d) { return d[0]; })*1.2])
-        .range([0, width2]),
-        xMap = function(d) { return xScale(x(d[0]));},
-        xAxis = d3.svg.axis().scale(xScale).orient("bottom");
-        
-var yValue = function(d) { return d;},
-        yScale = d3.scale.linear()
-        .domain([d3.min(pca_hands, function(d) { return d[1]; })/0.8, d3.max(pca_hands, function(d) { return d[1]; })*1.2])
-        .nice()
-        .range([height, 0]), 
-        yMap = function(d) { return yScale(yValue(d[1]));}, 
-        yAxis = d3.svg.axis().scale(yScale).orient("left");
+            var pc = [1,2];
 
-svg2.append("g")
-        .attr("class", "x_axis")
-        .attr("transform", 'translate(0, '+ height +')')
-        .call(xAxis);
-        
-svg2.append("text")
-        .attr("class", "xlabel")
-        .attr("x", width2 - 40)
-        .attr("y", height - 6)
-        .style("text-anchor", "end")
-        .text("PC"+pc[0]);
+            var pca_hands = d3.zip(hand_pca_data[pc[0]-1],hand_pca_data[pc[1]-1]);
 
-svg2.append("g")
-        .attr("class", "y_axis")
-        .call(yAxis);
-svg2.append("text")
-        .attr("class", "ylabel")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("PC"+pc[1]);
+            var pos = {x: 200, y: 230, xh: 60, yh: 85};
+            var scale_h = width/5;
 
-var tooltip = d3.select("#pca")
-        .append("div")
-        .style("background-color", "rgba(163, 171, 253, 0.6)")
-        .style("font-Family", "")
-        .style("background-opacity", "0.5")
-        .style("position", "absolute")
-        .style("visibility", "hidden");
 
-var lineFn = d3.svg.line()
-        .x(function(d) { return d[0]*scale_h; })
-        .y(function(d) { return d[1]*scale_h; });
+            var x = function(d) { return d;},
+                xScale = d3.scale.linear()
+                    .domain([d3.min(pca_hands, function(d) { return d[0]; })/0.8,d3.max(pca_hands, function(d) { return d[0]; })*1.2])
+                    .range([0, width2]),
+                xMap = function(d) { return xScale(x(d[0]));},
+                xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+            var yValue = function(d) { return d;},
+                yScale = d3.scale.linear()
+                    .domain([d3.min(pca_hands, function(d) { return d[1]; })/0.8, d3.max(pca_hands, function(d) { return d[1]; })*1.2])
+                    .nice()
+                    .range([height, 0]),
+                yMap = function(d) { return yScale(yValue(d[1]));},
+                yAxis = d3.svg.axis().scale(yScale).orient("left");
 
-var hand_picture = svg.append("g")
-        .append("path")
-        .attr("d", lineFn(hands[0]))
-});
+            svg2.append("g")
+                .attr("class", "x_axis")
+                .attr("transform", 'translate(0, '+ height +')')
+                .call(xAxis);
+            svg2.append("text")
+                .attr("class", "xlabel")
+                .attr("x", width2 - 40)
+                .attr("y", height - 6)
+                .style("text-anchor", "end")
+                .text("PC"+pc[0]);
 
- var points = svg2.selectAll('circle')
-        .data(pca_hands)
+            svg2.append("g")
+                .attr("class", "y_axis")
+                .call(yAxis);
+            svg2.append("text")
+                .attr("class", "ylabel")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", ".71em")
+                .style("text-anchor", "end")
+                .text("PC"+pc[1]);
+
+            var tooltip = d3.select("#pca")
+                .append("div")
+                .style("background-color", "rgba(163, 171, 253, 0.6)")
+                .style("font-Family", "")
+                .style("background-opacity", "0.5")
+                .style("position", "absolute")
+                .style("visibility", "hidden");
+
+
+
+            var lineFn = d3.svg.line()
+                .x(function(d) { return d[0]*scale_h; })
+                .y(function(d) { return d[1]*scale_h; });
+
+            var hand_picture = svg.append("g")
+                .append("path")
+                .attr("d", lineFn(hands[0]));
+
+            var points = svg2.selectAll('circle')
+                .data(pca_hands)
                 .enter()
                 .append('circle')
                 .attr("cx", xMap)
-        .attr("cy", yMap)
-        .attr('r', 4)
-        .on('click', function(d, i) {
-                hand_picture
-                .attr("d", lineFn(hands[i]));})
-        .attr("cursor","pointer")
-});
+                .attr("cy", yMap)
+                .attr('r', 4)
+                .on('mouseover', function(d, i) {
+                    hand_picture
+                        .attr("d", lineFn(hands[i]));})
+                .on('mouseover', function(d, i) {
+                    hand_picture
+                        .attr("d", lineFn(hands[i]))
+                        .exit().remove();})
+                .attr("cursor","pointer")
+            ;
+            d3.select("body").append("button")
+                .text("right-most")
+                .on("click",function(){
+                    var hand_picture = svg.append("g")
+                        .append("path")
+                        .attr("d", lineFn(hands[36]))
+                    ;
 
+                });
+
+        })
+
+
+
+    });
 
 </script>
 </body>
