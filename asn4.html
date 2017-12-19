@@ -191,20 +191,19 @@ var hand_picture = svg.append("g")
         .attr("d", lineFn(hands[0]))
 });
 
-
-var points = svg2.selectAll('circle')
-  .data(pca_hands)
-  .enter()
-  .append('circle')
-  .attr("cx", xMap)
-  .attr("cy", yMap)
-  .attr('r', 4)
-  .on('click', function(d, i) {
-  hand_picture
-    .transition()
-    .duration(1250)
-      .attr("d", lineFn(hands[i]));})
+ var points = svg2.selectAll('circle')
+        .data(pca_hands)
+                .enter()
+                .append('circle')
+                .attr("cx", xMap)
+        .attr("cy", yMap)
+        .attr('r', 4)
+        .on('click', function(d, i) {
+                hand_picture
+                .attr("d", lineFn(hands[i]));})
+        .attr("cursor","pointer")
 });
+
 
 </script>
 </body>
