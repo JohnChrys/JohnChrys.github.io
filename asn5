@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
+<style>
+        body { margin:15; padding:15; }
+        #map { position:absolute; top:15; bottom:15; width:100%; }
+    </style>
+
+</head>
+<body>
+
+<div id='map' style='width: 400px; height: 300px;'></div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZWxtaXJhY2xlIiwiYSI6ImNqYnRzMHZvaDF1OTYyeG05ODYzeG0xcjMifQ.46vT-JIIIOygrEn8SOZr1g';
+    var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v9',
+    center: [-122.427489,37.767831],
+    zoom: 11.38
+    
+    });
+    map.on('load', function() {
+    // Add a new source from our GeoJSON data and set the
+    map.addLayer({
+        'id': 'crime-6v0rnn',
+        'type': 'circle',
+        'source': {
+            type: 'vector',
+            url: 'mapbox://elmiracle.36uqjrui'
+        },
+        'source-layer': 'crime-6v0rnn',
+        'paint': {
+            // make circles larger as the user zooms from z12 to z22
+            'circle-radius': {
+                'base': 1.75,
+                'stops': [[12, 2], [22, 180]]
+            },
+            // color circles by ethnicity, using data-driven styles
+            'circle-color': {
+                property: 'DayOfWeek',
+                type: 'categorical',
+                stops: [
+                    ['Monday', '#3bb2d0'],
+                    ['Tuesday', '#3bb2d0'],
+                    ['Wednesday', '#3bb2d0'],
+                    ['Thursday', '#3bb2d0'],
+                    ['Friday', '#ff8c00'],
+                    ['Saturday', '#ff8c00'],
+                    ['Sunday','#3bb2d0']]
+            }
+        }
+    });
+    map.addControl(new mapboxgl.FullscreenControl());
+
+});
+
+</script>
+
+
+</body>
+</html>
