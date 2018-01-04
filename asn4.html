@@ -41,19 +41,15 @@
             margin-right: 10%;
             background-color: white;
             text-align: justify;
-
         }
-
         #hand, #pca {
             float: left;
         }
-
         circle {
             fill: blue;
             stroke: black;
             stroke-width: 1.5px;
         }
-
         circle:hover{
             fill: rgb(6, 44, 22);
             stroke: black;
@@ -77,46 +73,45 @@
             background-color: #d9fffc;
             border-radius: 5px;
         }
-
     </style>
 </head>
 <body>
 
 <h1 style="color: white; background-color: black; text-align: center">Assignment 4 - Group 17</h1>
 
-    <h2>Introduction</h2>
-    
-    <p>PCA (Principal Component Analysis) is a Machine learning dimensionality reduction tool. 
-        Principal components represent the underlying structure of our dataset providing the direction where the data is most spread out 
-        (higher variance). Simply speaking, we are searching for lines that when the data points are projected onto them 
-        we get the higher variance. <br />The dataset is deconstructed in eigenvectors and eigenvalues. 
-        The eigenvector represents the direction of the line and the eigenvalue the amount of variance captured in this direction.</p>
-   <h2>Methods</h2>
+<h2>Introduction</h2>
 
-    <p>
-    Our dataset consists of 40 human hand outlines. For each hand there are 56 x-coordinates and 56 y-coordinates, 
-        summing up to a 112-dimensional dataset. The file created by using PCA contains 112 eigenvectors/eigen values. 
-        Eigenvectors are projections of the dataset in a new set of dimensions, so the number of new dimensions is equal to the initial one. The first 40 eigen vectors produced have non-zero eigen values. 
-        The first 3 capture the most variance of the dataset. 
-        <br /><br />
-        The eigenvectors from 40 to 112 have zero eigenvalues and so the problem of dimensionality was reduced from 112-d to 40-d after performing PCA. Reducing the dimensions of the dataset simplifies it more, 
-        makes the visualization easier and points the differences between the observations.
-        <br /><br />
-        On the left panel we presented the contour of each hand, 
-        based on the selection of the data point on the PC1/PC2 scatterplot on the right hand.
-    </p>
-    
-    <h2>Instructions</h2>
-    <p>
-    In order to see a representation of a hand, simply click a circle on the pca plot. 
-        Clicking a point will give a corresponding representation. There are also two buttons on the right. 
-        One represents the most widely closed hand, 
-        and one represents the most widely opened hand - they are two points that are separated along the PC1 axis.
-        There is also a "tooltip" functionality at the bottom of the plot, which is triggered whenever the mouse hovers over the PCA points,
-        that tells us the number of the hand in question, something that's useful for our analysis later on.
-    </p>
-    
-    
+<p>PCA (Principal Component Analysis) is a Machine learning dimensionality reduction tool.
+    Principal components represent the underlying structure of our dataset providing the direction where the data is most spread out
+    (higher variance). Simply speaking, we are searching for lines that when the data points are projected onto them
+    we get the higher variance. <br />The dataset is deconstructed in eigenvectors and eigenvalues.
+    The eigenvector represents the direction of the line and the eigenvalue the amount of variance captured in this direction.</p>
+<h2>Methods</h2>
+
+<p>
+    Our dataset consists of 40 human hand outlines. For each hand there are 56 x-coordinates and 56 y-coordinates,
+    summing up to a 112-dimensional dataset. The file created by using PCA contains 112 eigenvectors/eigen values.
+    Eigenvectors are projections of the dataset in a new set of dimensions, so the number of new dimensions is equal to the initial one. The first 40 eigen vectors produced have non-zero eigen values.
+    The first 3 capture the most variance of the dataset.
+    <br /><br />
+    The eigenvectors from 40 to 112 have zero eigenvalues and so the problem of dimensionality was reduced from 112-d to 40-d after performing PCA. Reducing the dimensions of the dataset simplifies it more,
+    makes the visualization easier and points the differences between the observations.
+    <br /><br />
+    On the left panel we presented the contour of each hand,
+    based on the selection of the data point on the PC1/PC2 scatterplot on the right hand.
+</p>
+
+<h2>Instructions</h2>
+<p>
+    In order to see a representation of a hand, simply click a circle on the pca plot.
+    Clicking a point will give a corresponding representation. There are also two buttons on the right.
+    One represents the most widely closed hand,
+    and one represents the most widely opened hand - they are two points that are separated along the PC1 axis.
+    There is also a "tooltip" functionality at the bottom of the plot, which is triggered whenever the mouse hovers over the PCA points,
+    that tells us the number of the hand in question, something that's useful for our analysis later on.
+</p>
+
+
 <div id="plot">
     <div id="all_hands" style="background-color: transparent"></div>
     <div id="hand" align="center">
@@ -126,43 +121,43 @@
         <h3>PCA</h3>
     </div>
 </div>
-    
-    <h2>Results</h2>
-    
-    <p>
-    Since PC1 captures the greater variance of 64.7 %, it has bigger effect on the samples than PC2 which captures 17.3 % of the variance.
-        On the left side of PC1 we can see that the hands have more open gestures, 
-        while on the right side the hands have more closed fingers, 
-        deriving shorter distance from the thumb to the little finger on the left panel. 
-        For example, the difference is obvious between Hand 10 and Hand 15. 
-        <br /><br />
-        Hand 37 and Hand 39 are characterized as outliers. 
-        Their gestures are different from the rest of the observations in the dataset, 
-        since their gestures are a mix of closed and open fingers. 
-        On Hand 37 the distance from the middle finger to the little finger is getting shorter, 
-        whereas on Hand 39 this distance is getting bigger and the distance from the middle finger to the thumb is getting smaller.
-    </p>
-    
-    <h2>Conclusions</h2>
-    <p>
-    From left to right on the PC1 axis the distance between the fingers is getting shorter and shorter, 
-        resulting in a more closed palm. PC2 seems to be linked to the distance either from the middle finger to the little finger 
-        (distance gets shorter on the lower PC2 axis, while it gets wider on the upper PC2 axis) or 
-        to the distance from the middle finger to the thumb 
-        (distance gets wider on the lower PC2 axis, while it gets shorter on the upper PC2 axis).
-    </p>
-         <h2>Contributions</h2>
-     <p>
 
-       Elmir Mahammadov: Two Buttons, one for showing the hand that is wide open, one for showing the hand that is wide closed. <br /><br />
-       Both Buttons are on the right side of the screen.<br /><br />
-       John Chrys: Tooltip for hovering over the PCA points and seeing the number index of the hand. <br /><br />
-       Dimitris Chouliaras:  Multiple-hands grid showing all the hands and where to find them.
-     </p>
-    
-    <h3>Disclaimer</h3>
-    <p>Much of the code was "inspired" by a fellow : <a href = "http://jjalmagro.github.io/IDE/">student</a></p>
-   
+<h2>Results</h2>
+
+<p>
+    Since PC1 captures the greater variance of 64.7 %, it has bigger effect on the samples than PC2 which captures 17.3 % of the variance.
+    On the left side of PC1 we can see that the hands have more open gestures,
+    while on the right side the hands have more closed fingers,
+    deriving shorter distance from the thumb to the little finger on the left panel.
+    For example, the difference is obvious between Hand 10 and Hand 15.
+    <br /><br />
+    Hand 37 and Hand 39 are characterized as outliers.
+    Their gestures are different from the rest of the observations in the dataset,
+    since their gestures are a mix of closed and open fingers.
+    On Hand 37 the distance from the middle finger to the little finger is getting shorter,
+    whereas on Hand 39 this distance is getting bigger and the distance from the middle finger to the thumb is getting smaller.
+</p>
+
+<h2>Conclusions</h2>
+<p>
+    From left to right on the PC1 axis the distance between the fingers is getting shorter and shorter,
+    resulting in a more closed palm. PC2 seems to be linked to the distance either from the middle finger to the little finger
+    (distance gets shorter on the lower PC2 axis, while it gets wider on the upper PC2 axis) or
+    to the distance from the middle finger to the thumb
+    (distance gets wider on the lower PC2 axis, while it gets shorter on the upper PC2 axis).
+</p>
+<h2>Contributions</h2>
+<p>
+
+    Elmir Mahammadov: Two Buttons, one for showing the hand that is wide open, one for showing the hand that is wide closed. <br /><br />
+    Both Buttons are on the right side of the screen.<br /><br />
+    John Chrys: Tooltip for hovering over the PCA points and seeing the number index of the hand. <br /><br />
+    Dimitris Chouliaras:  Multiple-hands grid showing all the hands and where to find them.
+</p>
+
+<h3>Disclaimer</h3>
+<p>Much of the code was "inspired" by a fellow : <a href = "http://jjalmagro.github.io/IDE/">student</a></p>
+
 <script>
     var margin = {top:20 , right: 40, bottom: 30, left: 20},
         width = 960 - margin.left - margin.right,
@@ -199,7 +194,7 @@
             for (i in hand_data) {
                 var shape = hand_data[i];
                 hands[i] = d3.zip(shape.slice(0, 56),shape.slice(56, 113));
-            }
+            };
             var pc = [1,2];
             var pca_hands = d3.zip(hand_pca_data[pc[0]-1],hand_pca_data[pc[1]-1]);
             var pos = {x: 200, y: 230, xh: 60, yh: 85};
@@ -264,7 +259,7 @@
                         return tooltip
                             .style("visibility", "visible")
                             .style("left", (d3.event.pageX) + "px")
-                            .style("top", (d3.event.pageY - 28) + "px");})
+                            .style("top", (d3.event.pageY - 28) + "px")
                     .text("Hand: " + i), ind = i,
                 svg2.selectAll('circle')
                 .attr("r", function(d,i){
@@ -405,6 +400,7 @@
         }
         multiple_hands('#all_hands', 1800, 200, true, points);
     })
+    });
     
 </script>
 </body>
