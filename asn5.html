@@ -5,10 +5,10 @@
 <link href='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
 <style>
     body { margin:15; padding:15; }
-    #map { position:absolute; top:15; bottom:15; width:100%; }
+    #map { position:relative; top:15; bottom:15; width:100%; }
     #menu {
         background: #fff;
-        position: absolute;
+        position: relative;
         z-index: 1;
         left: 450px;
         top: 10px;
@@ -55,7 +55,7 @@
     
 <body>
 <p></p>
-<div id='map' style='width: 1000px; height: 350px;'></div>
+<div id='map' style='width: 1000px; height: 500px;'></div>
 <nav id="menu"></nav>
 
 <script>
@@ -139,7 +139,7 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
 
     var link = document.createElement('a');
     link.href = '#';
-    link.className = 'active';
+    link.className = ' ';
     link.textContent = id;
 
     link.onclick = function (e) {
