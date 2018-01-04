@@ -167,26 +167,22 @@
     var margin = {top:20 , right: 40, bottom: 30, left: 20},
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
-
-var svg = d3.select("#hand").append("svg")
-    .attr("width", width - 500)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
-var width2 = width - 400;
-var svg2 = d3.select("#pca").append("svg")
-    .attr("width", width2)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
-var svg3 = d3.select("#hand").append("svg")
-    .attr("width", width - 500)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
-
-
-
+    var svg = d3.select("#hand").append("svg")
+        .attr("width", width - 500)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
+    var width2 = width - 400;
+    var svg2 = d3.select("#pca").append("svg")
+        .attr("width", width2)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
+    var svg3 = d3.select("#hand").append("svg")
+        .attr("width", width - 500)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
     d3.text("hands.csv", function(data) {
         var hand_data = d3.csv.parseRows(data).map(function(row) {
             return row.map(function(val) {
@@ -199,26 +195,15 @@ var svg3 = d3.select("#hand").append("svg")
                     return +row[i]
                 })
             });
-
-
             var hands=[];
-
             for (i in hand_data) {
-
                 var shape = hand_data[i];
                 hands[i] = d3.zip(shape.slice(0, 56),shape.slice(56, 113));
-
-            };
-
-
+            }
             var pc = [1,2];
-
             var pca_hands = d3.zip(hand_pca_data[pc[0]-1],hand_pca_data[pc[1]-1]);
-
             var pos = {x: 200, y: 230, xh: 60, yh: 85};
             var scale_h = width/2.8;
-
-
             var x = function(d) { return d;},
                 xScale = d3.scale.linear()
                     .domain([d3.min(pca_hands, function(d) { return d[0]; })/0.8,d3.max(pca_hands, function(d) { return d[0]; })*1.2])
@@ -232,7 +217,6 @@ var svg3 = d3.select("#hand").append("svg")
                     .range([height, 0]),
                 yMap = function(d) { return yScale(yValue(d[1]));},
                 yAxis = d3.svg.axis().scale(yScale).orient("left");
-
             svg2.append("g")
                 .attr("class", "x_axis")
                 .attr("transform", 'translate(0, '+ height +')')
@@ -243,7 +227,6 @@ var svg3 = d3.select("#hand").append("svg")
                 .attr("y", height - 6)
                 .style("text-anchor", "end")
                 .text("PC"+pc[0]);
-
             svg2.append("g")
                 .attr("class", "y_axis")
                 .call(yAxis);
@@ -254,98 +237,88 @@ var svg3 = d3.select("#hand").append("svg")
                 .attr("dy", ".71em")
                 .style("text-anchor", "end")
                 .text("PC"+pc[1]);
-
             var tooltip = d3.select("#pca")
                 .append("div")
                 .attr("class", "tooltip")
                 .style("visibility", "hidden");
-
             var lineFn = d3.svg.line()
                 .x(function(d) { return d[0]*scale_h; })
                 .y(function(d) { return d[1]*scale_h; });
-
             var hand_picture = svg.append("g")
                 .append("path")
                 .attr("d", lineFn(hands[0]));
-            
+
             var points = svg2.selectAll('circle')
-                .data(pca_hands)
-                .enter()
-                .append('circle')
-                .attr("cx", xMap)
-                .attr("cy", yMap)
-                .attr('r', 4)
-                .on('click', function(d, i) {
-                    hand_picture
-                        .transition()
-                        .duration(1250)
-                        .attr("d", lineFn(hands[i]));})
-                .on("mouseover", function(d, i){
-                    return tooltip
-                        .style("visibility", "visible")
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");})
-                        .text("Hand: " + i), ind = i,
-                    svg2.selectAll('circle')
-                        .attr("r", function(d,i){
-                            if(ind===i) return 6;
-                            else return 4;
-                        })
-                        .style('fill',function(d,i){
-                            if(ind===i) return 'red';
-                            else return 'white';
-                        }),
-                    svg2.style("cursor", "pointer");})
-        
-                .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-                .on("mouseout", function(d, i){return tooltip.style("visibility", "hidden"), ind = i,
-                    svg2.selectAll('circle')
-                        .attr("r", function(d,i){
-                            if(ind===i) return 4;
-                            else return 4;
-                        })
-                        .style('fill',function(d,i){
-                            if(ind===i) return 'blue';});
-                                              })
-            ;
-           d3.select("#pca").append("button")
-                .text("Hand Widely Closed")
-                .on("click",function(){
+                    .data(pca_hands)
+                    .enter()
+                    .append('circle')
+                    .attr("cx", xMap)
+                    .attr("cy", yMap)
+                    .attr('r', 4)
+                    .on('click', function(d, i) {
+                        hand_picture
+                            .transition()
+                            .duration(1250)
+                            .attr("d", lineFn(hands[i]));})
+                    .on("mouseover", function(d, i){
+                        return tooltip
+                            .style("visibility", "visible")
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY - 28) + "px");})
+                    .text("Hand: " + i), ind = i,
+                svg2.selectAll('circle')
+                .attr("r", function(d,i){
+                    if(ind===i) return 6;
+                    else return 4;
+                })
+                .style('fill',function(d,i){
+                    if(ind===i) return 'red';
+                    else return 'white';
+                }),
+                svg2.style("cursor", "pointer");})
 
+            .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+            .on("mouseout", function(d, i){return tooltip.style("visibility", "hidden"), ind = i,
+                svg2.selectAll('circle')
+                    .attr("r", function(d,i){
+                        if(ind===i) return 4;
+                        else return 4;
+                    })
+                    .style('fill',function(d,i){
+                        if(ind===i) return 'blue';});
+            })
+        ;
+        d3.select("#pca").append("button")
+            .text("Hand Widely Closed")
+            .on("click",function(){
                 var hand_picture = svg3.append("g")
-                .append("path")
-                .style('fill','blue')
-                .style('opacity','0.5')
-                .attr("d", lineFn(hands[35]));
-
-                });
-           d3.select("#pca").append("button")
-                .text("Hand Widely Opened")
-                .on("click",function(){
+                    .append("path")
+                    .style('fill','blue')
+                    .style('opacity','0.5')
+                    .attr("d", lineFn(hands[35]));
+            });
+        d3.select("#pca").append("button")
+            .text("Hand Widely Opened")
+            .on("click",function(){
                 var hand_picture = svg3.append("g")
                     .append("path")
                     .style('fill','red')
                     .style('opacity','0.5')
                     .attr("d", lineFn(hands[29]))
                     .exit().remove()
-                  });
-            
+            });
 
         function multiple_hands(id, width, height, square, points)
         {
-
             var grid = d3.select(id).append("svg")
                 .attr("width", width)
                 .attr("height", height)
                 .attr("class", "chart");
-
             var calData = grid_gen(width, height, square, grid);
-
             var row = grid.selectAll(".row")
                 .data(calData)
                 .enter().append("svg:g")
                 .attr("class", "row");
-
             var col = row.selectAll(".cell")
                 .data(function (d) { return d; })
                 .enter().append("svg:rect")
@@ -357,10 +330,7 @@ var svg3 = d3.select("#hand").append("svg")
                 .style("fill", '#FFF')
                 .style("stroke", '#555');
             grid_gen(width, height, square, grid, points);
-
         }
-
-
         function grid_gen(gridWidth, gridHeight, square, grid, points)
         {
             var data = new Array();
@@ -382,7 +352,6 @@ var svg3 = d3.select("#hand").append("svg")
                 data.push(new Array());
                 for (var index_b = 0; index_b < 20; index_b++)
                 {
-
                     data[index_a].push({
                         width: gridItemWidth,
                         height: gridItemHeight,
@@ -435,14 +404,8 @@ var svg3 = d3.select("#hand").append("svg")
             return data;
         }
         multiple_hands('#all_hands', 1800, 200, true, points);
-
-
-        })
-
-
-
-    });
-
+    })
+    
 </script>
 </body>
 </html>
