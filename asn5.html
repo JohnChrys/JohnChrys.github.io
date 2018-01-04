@@ -54,9 +54,8 @@
 </head>
     
 <body>
-<p>HI 1</p>
-<div id='map' style='width: 400px; height: 300px;'></div>
-    <p>HI 2</p>
+<p></p>
+<div id='map' style='width: 1000px; height: 350px;'></div>
 <nav id="menu"></nav>
 
 <script>
@@ -145,7 +144,6 @@ for (var i = 0; i < toggleableLayerIds.length; i++) {
 
     link.onclick = function (e) {
         var clickedLayer = this.textContent;
-        e.preventDefault();
         e.stopPropagation();
 
         var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
