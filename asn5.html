@@ -4,25 +4,51 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
     <style>
-        body { margin:15px; padding:15px; }
+        body {
+            max-width: 1700px;
+            min-width: 1700px;
+            max-height: 95%;
+            min-height: 95%;
+        }
+        h2 {color: rgba(62, 62, 62, 0.98);
+            background-color: #f8ffff;
+            opacity: 0.95;
+            width: fit-content;
+            width:-moz-fit-content;
+        }
+        ol{
+            background-color: #d9fffc;
+            opacity: 0.95;
+            width: fit-content;
+            width:-moz-fit-content;
+            max-height: fit-content;
+        }
+        p {
+            background-color: #d9fffc;
+            opacity: 0.95;
+            width: fit-content;
+            width: -moz-fit-content;
+            max-height: fit-content;
+        }
         #map { position:relative; top:15px; bottom:15px; width:100%; }
         #menu {
             background: #fff;
             position: relative;
+            float: left;
             z-index: 1;
-            left: 450px;
-            top: 10px;
-            border-radius: 3px;
-            width: 120px;
+            margin-top: 20px;
+            width: fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+            width: -moz-fit-content;
             border: 1px solid rgba(0,0,0,0.4);
-            font-family: 'Open Sans', sans-serif;
+            font-family: "Segoe UI",sans-serif;
         }
 
         #menu a {
             font-size: 13px;
             color: #404040;
             display: block;
-            margin: 0;
             padding: 10px;
             text-decoration: none;
             border-bottom: 1px solid rgba(0,0,0,0.25);
@@ -52,25 +78,16 @@
             right: 0;
             background: rgba(255, 255, 255, 0.8);
             margin-right: 20px;
-            font-family: Arial, sans-serif;
+            font-family: "Segoe UI",sans-serif;
             overflow: auto;
             border-radius: 3px;
         }
-
-        #features {
-            top: 0;
-            height: 100px;
-            margin-top: 20px;
-            width: 250px;
-        }
-
         #legend {
             padding: 10px;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-            line-height: 18px;
-            height: 150px;
-            margin-bottom: 40px;
-            width: 100px;
+            height: fit-content;
+            width: fit-content;
+            width: -moz-fit-content;
         }
 
         .legend-key {
@@ -81,19 +98,66 @@
             margin-right: 5px;
         }
 
+        .mapboxgl-popup {
+            max-width: 400px;
+            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        }
+
+
 
     </style>
 
 </head>
 
 <body>
-<pre id='info'></pre>
+
+<h1 style="color: white; background-color: black; text-align: center">Assignment 4 - Group 17</h1>
+<h2>Motivation</h2>
+<p>In this assignment  </p>
+<h2>Methodology</h2>
+For this assignment we used the web-ready visualization tool <a href = "//www.mapbox.com/">mapbox</a>.
+It requires a user account in which you can upload your datafile. By following the instructions for using the data visualisation tools of
+    mapbox we obtain an access token and style key that are used to create the visualisation and make the code work. For more
+    on that see: <a href="//www.mapbox.com/help/define-access-token/">here</a> <br />
+    <a href="//www.mapbox.com/help/define-style-url/">and here</a><br /><br />
+    For this example, to provide a contrasting background against the bright colors we'll be seeing, we use a black-themed background.
+    <br /><br />
+    We also provide several information such as:
+<ol>
+    <li>Coordinates of the position of the cursor on the map.</li>
+    <li>Different colors for different days of the week on one map and</li>
+    <li>different colors for different crime types on another map</li>
+</ol>
+Note: Though the two maps can overlap, they need to be manually toggled off to look at them individually. <br />
+When the button color is blue it means the map is in effect, whereas when the color is white it's not in effect.
+<br /><br />
+
+The colors are described inside the legend of the map.
+
+
+
+
+
+
+<div><h2>Coordinates</h2><div id='info'>
+
+    <p>
+        {"x":   ,"y":   }<br />
+        {"lng":   ,"lat":   }
+
+    </p>
+
+</div>
+
+</div>
+<div id='features'><h2>Crime in San Francisco</h2><div id='pd'><p>Click a button to choose a dataset <br />or hover over the map for the coordinates!</p></div></div>
 <div id='map' style='width: 1000px; height: 500px;'></div>
-<nav id="menu"></nav>
-<div class='map-overlay' id='features'><h2>Crime in LA</h2><div id='pd'><p>Click a button to choose a dataset or hover over the map for the coordinates!</p></div></div>
+<nav class='map-overlay'  id="menu"></nav>
 <div class='map-overlay' id='legend'></div>
 
 <script>
+
+    //setup  mapbox
     mapboxgl.accessToken = 'pk.eyJ1IjoiZWxtaXJhY2xlIiwiYSI6ImNqYnRzMHZvaDF1OTYyeG05ODYzeG0xcjMifQ.46vT-JIIIOygrEn8SOZr1g';
     var map = new mapboxgl.Map({
         container: 'map',
@@ -103,6 +167,8 @@
 
     });
     map.on('load', function() {
+
+        //add Day of Week layer
         map.addLayer({
             'id': 'Weekday vs. Weekend',
             'type': 'circle',
@@ -117,8 +183,8 @@
             'paint': {
                 // make circles larger as the user zooms from z12 to z22
                 'circle-radius': {
-                    'base': 1.75,
-                    'stops': [[12, 2], [22, 180]]
+                    'base': 3,
+                    'stops': [[12, 3.5], [22, 250]]
                 },
                 'circle-color': {
                     property: 'DayOfWeek',
@@ -134,6 +200,8 @@
                 }
             }
         });
+
+        //add crime category layer
         map.addLayer({
             'id': 'Crime Category',
             'type': 'circle',
@@ -149,7 +217,7 @@
                 // make circles larger as the user zooms from z12 to z22
                 'circle-radius': {
                     'base': 2,
-                    'stops': [[12, 2.5], [22, 180]]
+                    'stops': [[12, 2.5], [22, 200]]
                 },
                 'circle-color': {
                     property: 'Category',
@@ -158,17 +226,20 @@
                         ['ASSAULT', '#e2ffaf'],  //Yellow, Assault
                         ['BURGLARY','#c43235'],  //Red, Burglary
                         ['VANDALISM', '#0DD91C'], //Green,  Vandalism
-                        ['LARCENY\/THEFT','#FFFFFF']] //white, larceny theft
+                        ['LARCENY\/THEFT','#ff7fff']] //white, larceny theft
                 }
             }
         });
 
+
+        //define variables for the legend
         var layers = ["Week day", "Weekend", 'Assault', 'Burglary', 'Vandalism','Larceny/Theft', 'All others'];
 
-        var colors = ['#3bb2d0', '#ff8c00', '#e2ffaf', '#c43235', '#0DD91C', '#FFFFFF', '#000000'];
+        var colors = ['#3bb2d0', '#ff8c00', '#e2ffaf', '#c43235', '#0DD91C', '#FF7FFF', '#000000'];
 
 
 
+        //add legend
         for (i = 0; i < layers.length; i++) {
             var layer = layers[i];
             var color = colors[i];
@@ -195,6 +266,49 @@
                 // e.lngLat is the longitude, latitude geographical position of the event
                 JSON.stringify(e.lngLat);
         });
+
+        // Create a popup, but don't add it to the map yet.
+        var popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+        });
+
+
+        //tooltip for filter 1
+        map.on('mouseenter', 'Weekday vs. Weekend', function(e) {
+            // Change the cursor style as a UI indicator.
+            map.getCanvas().style.cursor = 'pointer';
+
+            // Populate the popup and set its coordinates
+            // based on the feature found.
+            popup.setLngLat(e.features[0].geometry.coordinates)
+                .setHTML(e.features[0].properties.Category + "<br />" + e.features[0].properties.DayOfWeek)
+                .addTo(map);
+        });
+
+        map.on('mouseleave', 'Weekday vs. Weekend', function() {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
+        //tooltip for filter 2
+        map.on('mouseenter', 'Crime Category', function(e) {
+            // Change the cursor style as a UI indicator.
+            map.getCanvas().style.cursor = 'pointer';
+
+            // Populate the popup and set its coordinates
+            // based on the feature found.
+            popup.setLngLat(e.features[0].geometry.coordinates)
+                .setHTML(e.features[0].properties.Category + "<br />" + e.features[0].properties.DayOfWeek)
+                .addTo(map);
+        });
+
+        map.on('mouseleave', 'Crime Category', function() {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
+        //add fullscreen mode
         map.addControl(new mapboxgl.FullscreenControl());
 
     });
@@ -202,6 +316,7 @@
 
     var toggleableLayerIds = [ 'Weekday vs. Weekend', 'Crime Category' ];
 
+    //add buttons
     for (var i = 0; i < toggleableLayerIds.length; i++) {
         var id = toggleableLayerIds[i];
 
