@@ -10,8 +10,8 @@
         background: #fff;
         position: absolute;
         z-index: 1;
+        left: 450px;
         top: 10px;
-        right: 10px;
         border-radius: 3px;
         width: 120px;
         border: 1px solid rgba(0,0,0,0.4);
@@ -68,7 +68,7 @@
     });
     map.on('load', function() {
     map.addLayer({
-        'id': 'Day of Crimes',
+        'id': 'Weekday vs. Weekend',
         'type': 'circle',
         'source': {
             type: 'vector',
@@ -96,7 +96,7 @@
         }
     });
     map.addLayer({
-        'id': 'Category of Crimes',
+        'id': 'Burglary vs. Assault',
         'type': 'circle',
         'source': {
             type: 'vector',
@@ -131,7 +131,7 @@
     map.addControl(new mapboxgl.FullscreenControl());
 
 });
-var toggleableLayerIds = [ 'Day of Crimes', 'Category of Crimes' ];
+var toggleableLayerIds = [ 'Weekday vs. Weekend', 'Burglary vs. Assault' ];
 
 for (var i = 0; i < toggleableLayerIds.length; i++) {
     var id = toggleableLayerIds[i];
