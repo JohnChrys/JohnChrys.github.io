@@ -4,14 +4,59 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
 <style>
-        body { margin:15; padding:15; }
-        #map { position:absolute; top:15; bottom:15; width:100%; }
-    </style>
+    body { margin:15; padding:15; }
+    #map { position:absolute; top:15; bottom:15; width:100%; }
+    #menu {
+        background: #fff;
+        position: absolute;
+        z-index: 1;
+        top: 10px;
+        right: 10px;
+        border-radius: 3px;
+        width: 120px;
+        border: 1px solid rgba(0,0,0,0.4);
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    #menu a {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0,0,0,0.25);
+        text-align: center;
+    }
+
+    #menu a:last-child {
+        border: none;
+    }
+
+    #menu a:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+
+    #menu a.active {
+        background-color: #3887be;
+        color: #ffffff;
+    }
+
+    #menu a.active:hover {
+        background: #3074a4;
+    }
+
+</style>
+<pre id='info'></pre>
 
 </head>
 <body>
 
 <div id='map' style='width: 400px; height: 300px;'></div>
+<nav id="menu"></nav>
+
 <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiZWxtaXJhY2xlIiwiYSI6ImNqYnRzMHZvaDF1OTYyeG05ODYzeG0xcjMifQ.46vT-JIIIOygrEn8SOZr1g';
     var map = new mapboxgl.Map({
@@ -22,9 +67,8 @@
     
     });
     map.on('load', function() {
-    // Add a new source from our GeoJSON data and set the
     map.addLayer({
-        'id': 'crime-6v0rnn',
+        'id': 'Day of Crimes',
         'type': 'circle',
         'source': {
             type: 'vector',
@@ -37,7 +81,6 @@
                 'base': 1.75,
                 'stops': [[12, 2], [22, 180]]
             },
-            // color circles by ethnicity, using data-driven styles
             'circle-color': {
                 property: 'DayOfWeek',
                 type: 'categorical',
@@ -52,9 +95,71 @@
             }
         }
     });
+    map.addLayer({
+        'id': 'Category of Crimes',
+        'type': 'circle',
+        'source': {
+            type: 'vector',
+            url: 'mapbox://elmiracle.36uqjrui'
+        },
+        'source-layer': 'crime-6v0rnn',
+        'paint': {
+            // make circles larger as the user zooms from z12 to z22
+            'circle-radius': {
+                'base': 1.75,
+                'stops': [[12, 2], [22, 180]]
+            },
+            'circle-color': {
+                property: 'Category',
+                type: 'categorical',
+                stops: [
+                    ['ASSAULT', '#e2ffaf'],  //Yellow, Assault
+                    ['BURGLARY','#c43235']]  //Red, Burglary
+            }
+        }
+    });
+
+
+    map.on('mousemove', function (e) {
+    document.getElementById('info').innerHTML =
+        // e.point is the x, y coordinates of the mousemove event relative
+        // to the top-left corner of the map
+        JSON.stringify(e.point) + '<br />' +
+        // e.lngLat is the longitude, latitude geographical position of the event
+        JSON.stringify(e.lngLat);
+    });
     map.addControl(new mapboxgl.FullscreenControl());
 
 });
+var toggleableLayerIds = [ 'Day of Crimes', 'Category of Crimes' ];
+
+for (var i = 0; i < toggleableLayerIds.length; i++) {
+    var id = toggleableLayerIds[i];
+
+    var link = document.createElement('a');
+    link.href = '#';
+    link.className = 'active';
+    link.textContent = id;
+
+    link.onclick = function (e) {
+        var clickedLayer = this.textContent;
+        e.preventDefault();
+        e.stopPropagation();
+
+        var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+
+        if (visibility === 'visible') {
+            map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+            this.className = '';
+        } else {
+            this.className = 'active';
+            map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+        }
+    };
+
+    var layers = document.getElementById('menu');
+    layers.appendChild(link);
+}
 
 </script>
 
