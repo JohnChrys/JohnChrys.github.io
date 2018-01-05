@@ -131,9 +131,9 @@
 <h1 style="color: white; background-color: black; text-align: center">Assignment 4 - Group 17</h1>
 <h1>Motivation</h1>
 <p>In this assignment we wish to visualise some <a href="//www.kaggle.com/c/sf-crime/data">crime classification data for San Franscisco</a>
-from 2000 onwards. <br />We were also provided a dataset underlining the area of the
+    from 2000 onwards. <br />We were also provided a dataset underlining the area of the
     <a href="//wouterboomsma.github.io/ide2017/assignments/assignment5/sfpd_districts.geojson">Northern police district</a>
-which we will use in our analysis.
+    which we will use in our analysis.
 </p>
 
 <h1>Methodology</h1>
@@ -192,12 +192,49 @@ were grouped independently.
 
 </div></div>
 
+<h1>Discussion and analysis</h1>
+
+<p>Looking at map 1 it is immediately interesting to note the uniformity of the datapoints on the map, both for the days of the week
+    and the crime categories. <br />This means several things. First of all, it means that more crimes than we expected are commited on weekends than one weould expect if
+    the probabilities were equal because the orange dots aren't that greatly outnumbered in the map. Second of all, this means that there are no
+    areas where a crime type clusters(is more frequent) or an area with higher crime-rate on weekends or week days, save for outliers on the outskirts of the
+    total area we're studying. When looking at the crime types we can easily see that larceny and burglary cases are the most common of all the identified categories, and again, they don't seem
+    to cluster around any specific area.
+    <br />
+    When comparing the data for the northern district we can see that it has significantly less cases of any crime type compared to other districts, given it's size.
+    <br />
+    This observation is largely due to the fact that there are very few crimes happening in the area comprising the university of San Francisco, where, instead, in the northern part of the district we find the most cases reported in it.
+    Numerically speaking, it's the Mission District and Southern District that have the most cases, with 1901 and 1819 respectively, but geographically speaking, the
+    most crimes appear in the area north of the Northern district and by the south-west of Chinatown, in Tenderloin. The district with the less cases reported has been the Richmond District with only 513 cases.
+    In general, University campuses and parks show the less crime.
+    <br />
+
+    From the second map, we can see that the unsolved cases outnumber the solved ones(5958 to 4047) and that the, usually non-criminal, 188 psychopathic cases are evenly laid out throughout the city.
+</p>
+
+<h1>Conclusions</h1>
+
+<p>In conclusion, looking at the geographic spread of the crime data we can say that there doesn't appear to be an apparent increase in the crime frequency
+    of any type of crime on the weekends or weekdays or any important crime type clustering around any specific area in San Francisco. That does not mean, however, that
+    there aren't areas with more or less crime and depending on the district, the number of cases they work with differs a lot, from 513 in Richmond to 1900 in Mission.
+    The northern district in particular seems to be split in half, with the southern part that lies within the San Francisco University having very few reported crimes and the
+    northern part that's close to Tenderloin having the bulk of the crimes that occupy the district police officers. Having said that, The Tenderloin area seems
+    to have the highest density of crimes from all other areas with parks, golf-courses and universities having the lowest crime density, i.e being the safest.
+
+</p>
+
+<h1>Possible improvements</h1>
+
 <h1>Possible improvements</h1>
 <P>There are several improvements that can, or should, be made to the above data and analysis.<br />First of all, the data can be further analysed with a text editor to extract other useful information, <br />
-such as crime-count per area. Second of all, the data can be visualised in different ways, by using a barplot, boxplot or line plot to try to detect trends between two variables, such as the year and the crime-count of a specific crime category, etc.
-<br /> Lastly, the same mapbox could be used to plot the data on it differently. We suggest anything from a time transition of crime counts, to a point-count map, to a heatmap on top of the geographical map. <br /> It would be interesting, for example, 
-    to see if the number of unresolved cases remain the same or if it increases, which could suggest that older cases are eventually solved, <br /> and not that there is 
-    necessarily a high number of cases that goes unsolved. On top of that, it would be interesting to see analyse the probability that a case will go unsolved depending on the crime type. .
+    such as crime-count per area and or district. Second of all, the data can be visualised in different ways, by using a barplot, boxplot, line plot or even a table to try to detect among the variables variables, such as the year and the crime-count of a specific crime category, etc.
+    <br /> Lastly, the same mapbox could be used to plot the data on it differently. We suggest anything from a time transition of crime counts, to a point-count map, to a heatmap on top of the geographical map and a histogram of the number of crimes and resolution tags in each district <br />
+    That way we could analyse the performance of each district. If we want to study crime types instead, we can do a histogram of all crime types on a specific day or against the resolution tags.
+    <br />
+    It would also be interesting, for example,
+    to see if the number of unresolved cases remain the same or if it increases, which could suggest that older cases are eventually solved, <br /> and not that there is
+    necessarily a high number of cases that goes unsolved. On top of that, it would be interesting to see analyse the probability that a case will go unsolved depending on the crime type.
+
 </P>
 
 <script>
