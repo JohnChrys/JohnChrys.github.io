@@ -13,7 +13,7 @@ var min = Infinity,
     max = -Infinity;
 	
 // parse in the data	
-d3.csv("box2.csv", function(error, csv) {
+d3.csv("johnchrys.github.io/box2.csv", function(error, csv) {
 	// using an array of arrays with
 	// data[n][2] 
 	// where n = number of columns in the csv file 
