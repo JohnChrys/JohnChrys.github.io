@@ -12,7 +12,7 @@ var svg1= d3.select("#chart1")
     .attr("height", diameter)
     .attr("class", "bubble");
 
-d3.csv("test.csv", function(error, data){
+d3.csv("johnchrys.github.io/test.csv", function(error, data){
 
     //convert numerical values from strings to numbers
     data = data.map(function(d){ d.value = +d.freq; return d; });
