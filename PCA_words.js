@@ -28,7 +28,7 @@ var svg3 = d3.select("pca2cont").append("svg")
 .append("g")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("PCA_Words.csv", function(error, data) {
+d3.csv("johnchrys.github.io/PCA_Words.csv", function(error, data) {
 if (error) throw error;
 data.forEach(function(d) {
 d.sepalLength = +d.PC2;
