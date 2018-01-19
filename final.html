@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div id="nav" >
+        <a href = "#introduction" class="myButton"> Introduction</a> 
+        <a href = "#MSD song plot" class="myButton">MSD plots</a>
+        <a href = "#BoxPlot" class="myButton">Boxplots</a>
+        <a href = "#Bubble" class="myButton">Word bubble plot</a> 
+        <a href = "#PCA plot" class="myButton">PCA Plots</a>
+</div>
+
+<h1 id = "introduction" style="float:none">Preface</h1>
+<p style "padding-bottom:450px;">
+    Music has a long and rich history, but in the last 50 years we have created plentiful and diverse songs and genres. <br />
+    Each genre and song has its unique features, and we aim to visualize and explore the main differences and understand the data. <br /> 
+    The original dataset is <a href="//labrosa.ee.columbia.edu/millionsong/">the Million Song Dataset(MSD)</a>,
+    from in The Laboratory for the Recognition and Organization of Speech and Audio (LabROSA).
+    <br /><br />
+    We obtained a sample with 10,000 songs, from which we extracted the track ID, year of release, artist ID,<br />tempo, key, genre and loudness for each track. <br />
+    We also obtained an additional dataset(<a href="//labrosa.ee.columbia.edu/millionsong/musixmatch"></a>) that contains the same track IDs and corresponding lyrics for the tracks; more specifically,<br /> 
+    how many times a word was observed in a given song. 
+    <br /><br />
+    We aim to combine this dataset with the original dataset to make more meaningful observations about the tracks and their content. 
+    <br /><br />
+    You can use the table of contents on the left to navigate the sections of the page.
+</p>
+
+
+<h1 id = "MSD song plot">Visualisation of the MSD measurements</h1>
+<p style="padding:30px">    In order to detect correlations between variables, we made the graphs below showing artist familiarity against artist hotness, song tempo and song loudness respectively. 
+        The points are divided by genre.</p>
+
+<div id= "metric_box">
+<div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a class="hot_tab" href="#hot_tab" data-toggle="tab">Artist hotness</a></li>
+                    <li><a class="tempo_tab" href="#tempo_tab" data-toggle="tab">Tempo</a></li>
+                    <li><a class="loud_tab" href="#loud_tab" data-toggle="tab">Loudness</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="hot_tab">
+                        <h1>Artist familiarity VS artist "hotness"</h1>
+                        <hotnesscont></hotnesscont>
+                    </div>
+                    <div class="tab-pane" id="tempo_tab">
+                        <h1>Artist familiarity VS artist song tempo</h1>
+                        <tempocont></tempocont>
+                    </div>
+                    <div class="tab-pane" id="loud_tab">
+                        <h1>Artist familiarity VS artist song loudness</h1>
+                        <loudnesscont></loudnesscont>
+                    </div>
+                </div>
+        </div>
+        
+            <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+            <script src="https://d3js.org/d3.v3.min.js"></script>
+            <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+            <script>
+            
+            
+                    $.getScript("artist_scatter.js");
+                $(".hot_tab").click(function() {
+                    $.getScript("artist_scatter.js");
+                })
+
+
+                    $.getScript("artist_tempo.js");
+                $(".tempo_tab").click(function() {
+                    $.getScript("artist_tempo.js");
+                })
+
+                    $.getScript("artist_duration.js");
+                $(".loud_tab").click(function() {
+                    $.getScript("artist_duration.js");
+                
+                })
+            </script>
+</div>
+
+
+<h1 id = "Bubble">Bubble chart of the top-words</h1>
+<p style="padding:30px"></p>
+<div id="chart1" style="padding-left:350px"></div>
+
+
+<h1 id = "BoxPlot">Plot of the Music Key against song loudness and tempo</h1>
+<p style="padding:30px">Since the musical keys (scale) of the songs are categorical (12 possible keys), we used two boxplots to show the relationship between tempo, key and loudness.<br />
+    There is another boxplot also for loudness and key. 
+    These boxplots show overall distribution for their respective variable and they are used to compare values along horizontal axis. 
+    <br />
+    Order along the x axis is set to accommodate keys alphabetically (from A to G). 
+    For interactivity purposes, we made two tabs to switch between these two boxplots, in order to save space in overall visualization. 
+    <br /></p>
+
+<div id= "boxplot">
+<div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active"><a class="atab" href="#a_tab" data-toggle="tab">Loudness</a></li>
+            <li><a class="btab" href="#b_tab" data-toggle="tab">Tempo</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="a_tab">
+                <h1>Key Loudness Relationship</h1>
+                <acontent></acontent>
+            </div>
+            <div class="tab-pane" id="b_tab">
+                <h1>Key Tempo Relationship</h1>
+                <bcontent></bcontent>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+    <script>
+    
+    
+        $.getScript("box1.js");
+        $(".atab").click(function() {
+            $.getScript("box1.js");
+        })
+
+        $.getScript("boxloud.js");
+        $(".btab").click(function() {
+            $.getScript("boxloud.js");
+        })
+
+    </script>
+</div> 
+
+
+<h1 id = "PCA plot">Visualisation of the two PCAs</h1>
+<p style="padding:30px">
+    
+    We used principal component analysis on the words(see bubble chart) and the MSD variables(see scatter-plots) with the intention of exploring underlying patterns in each dataset,if any.<br />
+    That's because PCA can show use how similar the songs are to each other<br />
+    For the first PCA plot, five features were extracted: artist familiarity, artist hotness, the duration of the song, the loudness and also the tempo. 
+    <br />
+    For the second one, there are 5000 different words and their counts in each song. 19.5% of the variance is captured by PC1 and 5.9% by PC2. 
+    For the multidimension scaling we used the first 2 PCs. Same as previous plot, the data points were colored by genre.
+
+    We did multidimensional scaling on the first two principal components (PCs). PC1 captures 91% and PC2 captures 8 % of the variance. The rest of the components can be dropped safely without losing any information. <br />
+    The data points were colored by genre.
+    <br />
+</p>
+
+<div id= "my_pca" style="margin:auto">
+<div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active"><a class="PCA1" href="#PCA1" data-toggle="tab">MSD</a></li>
+            <li><a class="PCA2" href="#PCA2" data-toggle="tab">Musix match word-count</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="PCA1">
+                <h1>PCA of songs for MSD variables</h1>
+                <pca1cont></pca1cont>
+            </div>
+            <div class="tab-pane" id="PCA2">
+                <h1>PCA of songs for count of most used words</h1>
+                <pca2cont></pca2cont>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+    <script>
+    
+    
+        $.getScript("PCA_Metric.js");
+        $(".PCA1").click(function() {
+            $.getScript("PCA_Metric.js");
+        })
+
+        $.getScript("PCA_Words.js");
+        $(".PCA2").click(function() {
+            $.getScript("PCA_Words.js");
+        })
+    </script>
+</div>   
+
+  
+
+<script src="bubble.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="artist_scatter.js"></script> 
+<script src="artist_tempo.js"></script> 
+<script src="artist_duration.js"></script>
+<script src="PCA_Metric.js"></script> 
+<script src="PCA_words.js"></script> 
+
+</body>
+</html>
