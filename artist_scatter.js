@@ -28,7 +28,7 @@ var svg = d3.select("hotnesscont").append("svg")
 .append("g")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("SUBSET_METRIC.csv", function(error, data) {
+d3.csv("johnchrys.github.io/SUBSET_METRIC.csv", function(error, data) {
 if (error) throw error;
 data.forEach(function(d) {
 d.sepalLength = +d.artist_familiarity;
